@@ -5,14 +5,14 @@ services:
     image: mysql:8.0.17
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: pamplemousse123
-      MYSQL_DATABASE: myQCMPLUS
-      MYSQL_USER: test
-      MYSQL_PASSWORD: test_pass
+      MYSQL_ROOT_PASSWORD: ${MYSQLDB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQLDB_DATABASE}
+      MYSQL_USER: ${MYSQLDB_USER}
+      MYSQL_PASSWORD: ${MYSQLDB_PASSWORD}
     expose:
-      - "3308"
+      - ${MYSQLDB_LOCAL_PORT}
     ports:
-      - "3308:3306"
+      - ${MYSQLDB_LOCAL_PORT}:${MYSQLDB_DOCKER_PORT}
     volumes:
       - db:/var/lib/mysql
     networks:
@@ -26,14 +26,14 @@ services:
       context: . # Use an image built from the specified dockerfile in the `pampleback_app` directory.
       dockerfile: Dockerfile
     ports:
-      - "8091:8080" # Forward the exposed port 8080 on the container to port 8080 on the host machine
+      - ${SPRING_LOCAL_PORT}:${SPRING_DOCKER_PORT} # Forward the exposed port 8080 on the container to port 8080 on the host machine
     restart: unless-stopped
     depends_on: 
       - mysql-dbplemousse # This service depends on mysql. Start that first.
     environment: # Pass environment variables to the service
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-dbplemousse:3306/myQCMPLUS
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: pamplemousse123
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-dbplemousse:${MYSQLDB_DOCKER_PORT}/${MYSQLDB_DATABASE}
+      SPRING_DATASOURCE_USERNAME: ${MYSQLDB_ROOT_USER}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQLDB_ROOT_PASSWORD}
     networks:
       - backend
 
