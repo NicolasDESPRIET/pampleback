@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  mysql-dbplemousse:
+    image: mysql:8.0.17
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: pamplemousse123
+      MYSQL_DATABASE: myQCMPLUS
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test_pass
+    expose:
+      - "3308"
+    ports:
+      - "3308:3306"
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - bd_only
+
+volumes:
+  db:
+
+networks:
+  bd_only:
