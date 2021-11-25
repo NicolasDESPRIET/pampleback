@@ -6,13 +6,13 @@ There is the image of the data base too, set in docker
 ***
 A little intro about the installation. this application can be launched in a docker. 
 
-# first step :
+### first step :
 ```
 $ git clone https://github.com/NicolasDESPRIET/pampleback.git
 $ cd ../path/to/the/folder
 ```
 
-# We have to ways to start it. First way, with only bd in docker and without env file.
+### We have to ways to start it. First way, with only bd in docker and without env file.
 - first step: 
 ```
 $ docker-compose -f docker-compose-db.yml up --build
@@ -31,7 +31,7 @@ $ .\mvn spring-boot:run
 
 Then, to apply the changes, you will just have to redo step 2.
 
-# Second way, with bdd and back app in a docker, using an env file. It will be necessary to ask the env file to Nicolas Despriet.
+### Second way, with bdd and back app in a docker, using an env file. It will be necessary to ask the env file to Nicolas Despriet.
 After getting the .env, put it next to the docker-compose, then :
 ```
 $ docker-compose -f docker-compose.yml up --build
