@@ -4,6 +4,8 @@ services:
   mysql-dbplemousse:
     image: mysql:8.0.17
     restart: unless-stopped
+    env_file:
+      - .env
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQLDB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQLDB_DATABASE}
@@ -25,6 +27,8 @@ services:
     build:
       context: . # Use an image built from the specified dockerfile in the `pampleback_app` directory.
       dockerfile: Dockerfile
+    env_file:
+      - .env
     ports:
       - ${SPRING_LOCAL_PORT}:${SPRING_DOCKER_PORT} # Forward the exposed port 8080 on the container to port 8080 on the host machine
     restart: unless-stopped
