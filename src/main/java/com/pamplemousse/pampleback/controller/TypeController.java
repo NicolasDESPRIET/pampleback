@@ -2,7 +2,7 @@ package com.pamplemousse.pampleback.controller;
 
 import java.util.List;
 
-import com.pamplemousse.pampleback.dto.TypeDto;
+import com.pamplemousse.pampleback.model.Type;
 import com.pamplemousse.pampleback.service.TypeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,31 +29,31 @@ public class TypeController {
     }
 
     @GetMapping
-    public List<TypeDto> getAllTypes() {
+    public List<Type> getAllTypes() {
         System.out.println("get alltypes");
         return typeService.getAllTypes();
     }
 
     @GetMapping(path = "/{id}")
-    public TypeDto getUserById(@PathVariable final Long id) {
+    public Type getUserById(@PathVariable final Long id) {
         return typeService.getTypeByid(id);
     }
 
     @GetMapping(path = "/name/{name}")
-    public TypeDto getUserByName(@PathVariable final String name) {
+    public Type getUserByName(@PathVariable final String name) {
         return typeService.getTypeByName(name);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public TypeDto createUser(@RequestBody final TypeDto typeDto) {
-        return typeService.addType(typeDto);
+    public Type createUser(@RequestBody final Type type) {
+        return typeService.addType(type);
     }
 
     @PutMapping(path = "/{id}")
-    public TypeDto updateUser(@PathVariable final Long id,
-            @RequestBody final TypeDto typeDto) {
-        return typeService.updateType(typeDto);
+    public Type updateUser(@PathVariable final Long id,
+            @RequestBody final Type type) {
+        return typeService.updateType(type);
     }
 
     @DeleteMapping(path = "/{id}")

@@ -2,14 +2,14 @@ package com.pamplemousse.pampleback.service;
 
 import java.util.List;
 
-import com.pamplemousse.pampleback.dto.TypeDto;
+import com.pamplemousse.pampleback.model.Type;
 
 public interface TypeService {
      /**
      * get all Types in the db.
      * @return List<Type>.
      */
-    List<TypeDto> getAllTypes();
+    List<Type> getAllTypes();
 	
     /**
      * get one Type by his id.
@@ -17,7 +17,7 @@ public interface TypeService {
      * @return the researched Type.
      * @throws NotFoundException.
      */
-    TypeDto getTypeByid(Long id);
+    Type getTypeByid(Long id);
 
     /**
      * get the first Type by his name.
@@ -25,24 +25,24 @@ public interface TypeService {
      * @return the researched Type.
      * @throws NotFoundException.
      */
-    TypeDto getTypeByName(String name);
+    Type getTypeByName(String name);
 	
     /**
      * add an Type to the db.
-     * @param typeDto the nex Type.
+     * @param type the nex Type.
      * @return the Type added.
      * @throws BadRequestException.
      */
-    TypeDto addType(TypeDto typeDto);
+    Type addType(Type type);
 	
     /**
      * update an Type with new value.
-     * @param typeDto the update data for Type.
+     * @param type the update data for Type.
      * @return the updated Type.
      * @throws BadRequestException.
      * @throws NotFoundException.
      */
-    TypeDto updateType(TypeDto typeDto);
+    Type updateType(Type type);
 	
     /**
      * delete the Type by his id.

@@ -1,24 +1,31 @@
-version: '3'
+version: '3.3'
 
 services:
-  mysql-dbplemousse:
+  db-plemousse:
     image: mysql:8.0.17
-    restart: unless-stopped
+    restart: always
     env_file:
       - .env
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQLDB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQLDB_DATABASE}
+      # So you don't have to use root, but you can if you like
       MYSQL_USER: ${MYSQLDB_USER}
+      # You can use whatever password you like
       MYSQL_PASSWORD: ${MYSQLDB_PASSWORD}
-    expose:
-      - ${MYSQLDB_LOCAL_PORT}
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: ${MYSQLDB_ROOT_PASSWORD}
+      
     ports:
+      # <Port exposed> : < MySQL Port running inside container>
       - ${MYSQLDB_LOCAL_PORT}:${MYSQLDB_DOCKER_PORT}
+    expose:
+      # Opens port 3306 on the container
+      - ${MYSQLDB_DOCKER_PORT}
+      # Where our data will be persisted
     volumes:
-      - db:/var/lib/mysql
+      - my-db:/var/lib/mysql
     networks:
-      - backend
+      my-networks:
 
   # App backend service
   pampleback_app:
@@ -30,19 +37,21 @@ services:
     env_file:
       - .env
     ports:
-      - ${SPRING_LOCAL_PORT}:${SPRING_DOCKER_PORT} # Forward the exposed port 8080 on the container to port 8080 on the host machine
+      - ${SPRING_LOCAL_PORT}:${SPRING_LOCAL_PORT} # Forward the exposed port 8080 on the container to port 8080 on the host machine
+    expose:
+      - ${SPRING_LOCAL_PORT}
     restart: unless-stopped
     depends_on: 
-      - mysql-dbplemousse # This service depends on mysql. Start that first.
+      - db-plemousse # This service depends on mysql. Start that first.
     environment: # Pass environment variables to the service
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-dbplemousse:${MYSQLDB_DOCKER_PORT}/${MYSQLDB_DATABASE}
+      SPRING_DATASOURCE_URL: jdbc:mysql://db-plemousse:${MYSQLDB_DOCKER_PORT}/${MYSQLDB_DATABASE}
       SPRING_DATASOURCE_USERNAME: ${MYSQLDB_ROOT_USER}
       SPRING_DATASOURCE_PASSWORD: ${MYSQLDB_ROOT_PASSWORD}
     networks:
-      - backend
+      my-networks:
 
 volumes:
-  db:
+  my-db:
 
 networks:
-  backend:
+  my-networks:
