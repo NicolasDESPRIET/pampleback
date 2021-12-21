@@ -1,25 +1,28 @@
-version: '3'
-
+version: '3.3'
 services:
-  mysql-dbplemousse:
+  db-plemousse:
     image: mysql:8.0.17
-    restart: unless-stopped
+    restart: always
+    env_file:
+      - .env
     environment:
-      MYSQL_ROOT_PASSWORD: pamplemousse123
-      MYSQL_DATABASE: myQCMPLUS
-      MYSQL_USER: test
-      MYSQL_PASSWORD: test_pass
-    expose:
-      - "3308"
+      MYSQL_DATABASE: ${MYSQLDB_DATABASE}
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: ${MYSQLDB_USER}
+      # You can use whatever password you like
+      MYSQL_PASSWORD: ${MYSQLDB_PASSWORD}
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: ${MYSQLDB_ROOT_PASSWORD}
+      
     ports:
-      - "3308:3306"
+      # <Port exposed> : < MySQL Port running inside container>
+      - ${MYSQLDB_LOCAL_PORT}:${MYSQLDB_DOCKER_PORT}
+    expose:
+      # Opens port 3306 on the container
+      - ${MYSQLDB_DOCKER_PORT}
+      # Where our data will be persisted
     volumes:
-      - db:/var/lib/mysql
-    networks:
-      - bd_only
-
+      - my-db:/var/lib/mysql
+# Names our volume
 volumes:
-  db:
-
-networks:
-  bd_only:
+  my-db:
