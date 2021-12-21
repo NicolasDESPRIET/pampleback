@@ -65,7 +65,7 @@ public class TypeServiceImpl implements TypeService {
      * {@inheritDoc}
      */
     @Override
-    public Type addType(Type type) {
+    public Type createType(Type type) {
         if (!typeRepository.findByName(type.getName()).isEmpty()) {
             throw new BadRequestException(ExceptionMessageConstants.TYPE_NAME_ALREADY_USED_IN_DB);
         }
@@ -78,11 +78,12 @@ public class TypeServiceImpl implements TypeService {
      * {@inheritDoc}
      */
     @Override
-    public Type updateType(Type type) {
+    public Type updateType(Type type, Long id) {
         Optional<Type> typeName = typeRepository.findByName(type.getName());
         if (!typeName.isEmpty() && type.getId() != typeName.get().getId()) {
             throw new BadRequestException(ExceptionMessageConstants.TYPE_NAME_ALREADY_USED_IN_DB);
         }
+        type.setId(id);
         Type typeUpdated = typeRepository.save(type);
         return typeUpdated;
     }

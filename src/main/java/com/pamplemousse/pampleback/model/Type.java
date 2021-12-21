@@ -17,7 +17,7 @@ public final class Type implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "type_id")
-    private Long id;
+    private long id;
 
     @Column(name = "type_name")
     private String name;

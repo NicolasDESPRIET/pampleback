@@ -33,16 +33,17 @@ public interface TypeService {
      * @return the Type added.
      * @throws BadRequestException.
      */
-    Type addType(Type type);
+    Type createType(Type type);
 	
     /**
      * update an Type with new value.
      * @param type the update data for Type.
+     * @param id the id of type to update.
      * @return the updated Type.
      * @throws BadRequestException.
      * @throws NotFoundException.
      */
-    Type updateType(Type type);
+    Type updateType(Type type, Long id);
 	
     /**
      * delete the Type by his id.
