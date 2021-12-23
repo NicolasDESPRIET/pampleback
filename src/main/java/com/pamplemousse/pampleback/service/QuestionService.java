@@ -7,14 +7,12 @@ import com.pamplemousse.pampleback.model.Question;
 public interface QuestionService {
     /**
      * get all Questions in the db.
-     * 
      * @return List<Question>.
      */
     List<Question> getAllQuestions();
 
     /**
      * get one Question by his id.
-     * 
      * @param id the id researched.
      * @return the researched Question.
      * @throws NotFoundException.
@@ -23,7 +21,6 @@ public interface QuestionService {
 
     /**
      * get the first Question by his ennonce.
-     * 
      * @param ennonce the question researched.
      * @return the researched question.
      * @throws NotFoundException.
@@ -32,18 +29,16 @@ public interface QuestionService {
 
     /**
      * add an Question to the db.
-     * 
-     * @param Question the nex Question.
-     * @param the      id of the response of the question.
+     * @param question      the next Question.
+     * @param responseId   the id of the response of the question.
      * @return the Question added.
      * @throws BadRequestException.
      */
-    Question createQuestion(Question question, Long response_id);
+    Question createQuestion(Question question, Long responseId);
 
     /**
      * update an Question with new value.
-     * 
-     * @param Question the update data for Question.
+     * @param question the update data for Question.
      * @param id       the id of Question to update.
      * @return the updated Question.
      * @throws BadRequestException.
@@ -53,7 +48,6 @@ public interface QuestionService {
 
     /**
      * delete the Question by his id.
-     * 
      * @param id the id of the Question.
      * @throws NotFoundException.s
      */

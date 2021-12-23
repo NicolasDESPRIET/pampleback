@@ -7,7 +7,7 @@ import com.pamplemousse.pampleback.model.User;
 
 
 public interface UserService {
-    
+
     /**
      * get all users in the db.
      * @return List<User>.
@@ -20,14 +20,14 @@ public interface UserService {
      * @return List<User>.
      */
     List<User> getAllUsersByType(Long id);
-	
+
     /**
      * get one user by his id.
      * @param id the id researched.
      * @return the researched user.
      * @throws NotFoundException.
      */
-	User getUserByid(Long id);
+    User getUserByid(Long id);
 
     /**
      * get the first user by his name.
@@ -36,15 +36,15 @@ public interface UserService {
      * @throws NotFoundException.
      */
     User getUserByName(String name);
-	
+
     /**
      * add an user to the db.
      * @param userFromClientDto the next user.
      * @return the user added.
      * @throws BadRequestException.
      */
-	User createUser(UserFromClientDto userFromClientDto);
-	
+    User createUser(UserFromClientDto userFromClientDto);
+
     /**
      * update an user with new value.
      * @param userFromClientDto the update data for user.
@@ -54,7 +54,7 @@ public interface UserService {
      * @throws NotFoundException.
      */
 	User updateUser(UserFromClientDto userFromClientDto, Long id);
-	
+
     /**
      * delete the user by his id.
      * @param id the id of the user.

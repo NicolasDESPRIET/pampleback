@@ -20,13 +20,19 @@ import javax.persistence.Table;
 public final class Response implements Serializable {
     private static final long serialVersionUID = 12875295498L;
 
+    /**
+     * long id.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "r_id")
     private long id;
 
+    /**
+     * Map<String, Integer> values.
+     */
     @ElementCollection
-    @CollectionTable(name = "response_values", 
+    @CollectionTable(name = "response_values",
       joinColumns = {@JoinColumn(name = "response_id", referencedColumnName = "r_id")})
     @MapKeyColumn(name = "r_text")
     @Column(name = "r_values")
@@ -34,7 +40,6 @@ public final class Response implements Serializable {
 
     /**
      * getter id.
-     * 
      * @return id
      */
     public long getId() {
@@ -43,16 +48,14 @@ public final class Response implements Serializable {
 
     /**
      * setter id.
-     * 
      * @param id
      */
-    public void setId(long id) {
+    public void setId(final long id) {
         this.id = id;
     }
 
     /**
      * getter values.
-     * 
      * @return mapValues
      */
     public Map<String, Integer> getValues() {
@@ -61,10 +64,9 @@ public final class Response implements Serializable {
 
     /**
      * setter values.
-     * 
      * @param values
      */
-    public void setValues(Map<String, Integer> values) {
+    public void setValues(final Map<String, Integer> values) {
         this.values = values;
     }
 
@@ -84,7 +86,7 @@ public final class Response implements Serializable {
      * {@inheritDoc}
      */
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

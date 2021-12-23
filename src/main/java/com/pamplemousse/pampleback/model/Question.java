@@ -17,14 +17,23 @@ import javax.persistence.Table;
 public final class Question implements Serializable {
     private static final long serialVersionUID = 687575998L;
 
+    /**
+     * long id.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "q_id")
     private long id;
 
+    /**
+     * String ennonce.
+     */
     @Column(name = "q_ennonce")
     private String ennonce;
 
+    /**
+     * Response response.
+     */
     @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "q_r_id", referencedColumnName = "r_id")
     private Response response;
@@ -41,7 +50,7 @@ public final class Question implements Serializable {
      * setter id.
      * @param id
      */
-    public void setId(long id) {
+    public void setId(final long id) {
         this.id = id;
     }
 
@@ -57,7 +66,7 @@ public final class Question implements Serializable {
      * setter ennonce.
      * @param ennonce
      */
-    public void setEnnonce(String ennonce) {
+    public void setEnnonce(final String ennonce) {
         this.ennonce = ennonce;
     }
 
@@ -73,7 +82,7 @@ public final class Question implements Serializable {
      * setter response.
      * @param response
      */
-    public void setResponse(Response response) {
+    public void setResponse(final Response response) {
         this.response = response;
     }
 
@@ -94,26 +103,34 @@ public final class Question implements Serializable {
      * {@inheritDoc}
      */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Question other = (Question) obj;
         if (ennonce == null) {
-            if (other.ennonce != null)
+            if (other.ennonce != null) {
                 return false;
-        } else if (!ennonce.equals(other.ennonce))
+            }
+        } else if (!ennonce.equals(other.ennonce)) {
             return false;
-        if (id != other.id)
+        }
+        if (id != other.id) {
             return false;
+        }
         if (response == null) {
-            if (other.response != null)
+            if (other.response != null) {
                 return false;
-        } else if (!response.equals(other.response))
+            }
+        } else if (!response.equals(other.response)) {
             return false;
+        }
         return true;
     }
 
@@ -124,5 +141,4 @@ public final class Question implements Serializable {
     public String toString() {
         return "Question [ennonce=" + ennonce + ", id=" + id + ", response=" + response + "]";
     }
-    
 }

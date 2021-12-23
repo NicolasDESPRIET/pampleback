@@ -18,67 +18,122 @@ import javax.validation.constraints.NotNull;
 public final class User implements Serializable {
     private static final long serialVersionUID = 346733376635L;
 
+    /**
+     * Long id.
+     */
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
     private Long id;
 
+    /**
+     * String name.
+     */
     @NotBlank
     @NotNull
     @Column(name = "user_name")
     private String name;
 
+    /**
+     * String password.
+     */
     @NotBlank
     @NotNull
     @Column(name = "user_password")
     private String password;
 
+    /**
+     * Type type.
+     */
     @NotBlank
     @NotNull
-    @JoinColumn(name="user_type_id", referencedColumnName = "type_id")
+    @JoinColumn(name = "user_type_id", referencedColumnName = "type_id")
     @ManyToOne
     private Type type;
 
+    /**
+     * String societe.
+     */
     @Column(name = "user_societe")
     private String societe;
 
+    /**
+     * getter id.
+     * @return Long id
+     */
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    /**
+     * setter id.
+     * @param id
+     */
+    public void setId(final Long id) {
         this.id = id;
     }
 
+    /**
+     * getter name.
+     * @return String
+     */
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    /**
+     * setter name.
+     * @param name
+     */
+    public void setName(final String name) {
         this.name = name;
     }
 
+    /**
+     * getter password.
+     * @return String password
+     */
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    /**
+     * setter Password.
+     * @param password
+     */
+    public void setPassword(final String password) {
         this.password = password;
     }
 
+    /**
+     * getter type.
+     * @return Type type
+     */
     public Type getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    /**
+     * setter Type.
+     * @param type
+     */
+    public void setType(final Type type) {
         this.type = type;
     }
 
+    /**
+     * getter societe.
+     * @return String societe
+     */
     public String getSociete() {
         return societe;
     }
 
-    public void setSociete(String societe) {
+    /**
+     * setter societe.
+     * @param societe
+     */
+    public void setSociete(final String societe) {
         this.societe = societe;
     }
 
@@ -101,7 +156,7 @@ public final class User implements Serializable {
      * {@inheritDoc}
      */
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

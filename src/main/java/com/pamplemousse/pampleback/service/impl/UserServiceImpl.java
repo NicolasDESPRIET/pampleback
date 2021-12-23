@@ -20,17 +20,32 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
+    /**
+     * userRepository.
+     */
     private UserRepository userRepository;
 
+    /**
+     * typeRepository.
+     */
     private TypeRepository typeRepository;
 
+    /**
+     * userMapper.
+     */
     private UserMapper userMapper;
 
+    /**
+     * Constructor of the service.
+     * @param userRepository
+     * @param typeRepository
+     * @param userMapper
+     */
     @Autowired
     public UserServiceImpl(
-            UserRepository userRepository,
-            TypeRepository typeRepository,
-            UserMapper userMapper) {
+            final UserRepository userRepository,
+            final TypeRepository typeRepository,
+            final UserMapper userMapper) {
         this.userRepository = userRepository;
         this.typeRepository = typeRepository;
         this.userMapper = userMapper;
@@ -49,9 +64,10 @@ public class UserServiceImpl implements UserService {
      * {@inheritDoc}
      */
     @Override
-    public List<User> getAllUsersByType(Long id) {
+    public List<User> getAllUsersByType(final Long id) {
         Type type = typeRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(ExceptionMessageConstants.TYPE_NOT_FOUND_IN_DB));
+                .orElseThrow(() -> new NotFoundException(
+                        ExceptionMessageConstants.TYPE_NOT_FOUND_IN_DB));
         System.out.println(type);
         List<User> list = userRepository.findByType(type);
         return list;
@@ -61,7 +77,7 @@ public class UserServiceImpl implements UserService {
      * {@inheritDoc}
      */
     @Override
-    public User getUserByid(Long id) {
+    public User getUserByid(final Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(ExceptionMessageConstants.USER_ID_NOT_FOUND_IN_DB));
 
@@ -72,10 +88,10 @@ public class UserServiceImpl implements UserService {
      * {@inheritDoc}
      */
     @Override
-    public User getUserByName(String name) {
+    public User getUserByName(final String name) {
         User user = userRepository.findByName(name)
-                .orElseThrow(() -> new NotFoundException(ExceptionMessageConstants.USER_NOT_FOUND_IN_DB));
-
+                .orElseThrow(() -> new NotFoundException(
+                        ExceptionMessageConstants.USER_NOT_FOUND_IN_DB));
         return user;
     }
 
@@ -83,17 +99,18 @@ public class UserServiceImpl implements UserService {
      * {@inheritDoc}
      */
     @Override
-    public User createUser(UserFromClientDto userFromClientDto) {
+    public User createUser(final UserFromClientDto userFromClientDto) {
         Optional<User> userNameTest = userRepository.findByName(userFromClientDto.getName());
         if (!userNameTest.isEmpty()) {
-            throw new BadRequestException(ExceptionMessageConstants.USER_NAME_USED_IN_DB);
+            throw new BadRequestException(
+                    ExceptionMessageConstants.USER_NAME_USED_IN_DB);
         }
 
         Type type = typeRepository.findById(userFromClientDto.getTypeId())
-                .orElseThrow(() -> new BadRequestException(ExceptionMessageConstants.USER_TYPE_NOT_FOUND_IN_DB));
-        System.out.println(type);
+                .orElseThrow(() -> new BadRequestException(
+                        ExceptionMessageConstants.USER_TYPE_NOT_FOUND_IN_DB));
 
-        User userCreated = userMapper.UserDtoToUser(userFromClientDto);
+        User userCreated = userMapper.userDtoToUser(userFromClientDto);
         userCreated.setType(type);
 
         userCreated = userRepository.save(userCreated);
@@ -105,19 +122,22 @@ public class UserServiceImpl implements UserService {
      * {@inheritDoc}
      */
     @Override
-    public User updateUser(UserFromClientDto userFromClientDto, Long id) {
+    public User updateUser(final UserFromClientDto userFromClientDto, final Long id) {
         Optional<User> userNameTest = userRepository.findByName(userFromClientDto.getName());
         if (!userNameTest.isEmpty()) {
-            throw new BadRequestException(ExceptionMessageConstants.USER_NAME_USED_IN_DB);
+            throw new BadRequestException(
+                    ExceptionMessageConstants.USER_NAME_USED_IN_DB);
         }
 
         Type type = typeRepository.findById(userFromClientDto.getTypeId())
-                .orElseThrow(() -> new BadRequestException(ExceptionMessageConstants.USER_TYPE_NOT_FOUND_IN_DB));
+                .orElseThrow(() -> new BadRequestException(
+                        ExceptionMessageConstants.USER_TYPE_NOT_FOUND_IN_DB));
 
         userRepository.findById(id)
-                .orElseThrow(() -> new BadRequestException(ExceptionMessageConstants.USER_ID_NOT_FOUND_IN_DB));
+                .orElseThrow(() -> new BadRequestException(
+                        ExceptionMessageConstants.USER_ID_NOT_FOUND_IN_DB));
 
-        User userUpdate = userMapper.UserDtoToUser(userFromClientDto);
+        User userUpdate = userMapper.userDtoToUser(userFromClientDto);
         userUpdate.setType(type);
         userUpdate.setId(id);
         userUpdate = userRepository.save(userUpdate);
@@ -129,19 +149,10 @@ public class UserServiceImpl implements UserService {
      * {@inheritDoc}
      */
     @Override
-    public void deleteUser(Long id) {
+    public void deleteUser(final Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new BadRequestException(ExceptionMessageConstants.USER_ID_NOT_FOUND_IN_DB));
+                .orElseThrow(() -> new BadRequestException(
+                        ExceptionMessageConstants.USER_ID_NOT_FOUND_IN_DB));
         userRepository.delete(user);
     }
-
-    /**
-     * Logger Instance if need
-     * 
-     * import org.apache.logging.log4j.LogManager; import
-     * org.apache.logging.log4j.Logger;
-     * 
-     * private static Logger log = LogManager.getLogger(Object.class);
-     */
-
 }

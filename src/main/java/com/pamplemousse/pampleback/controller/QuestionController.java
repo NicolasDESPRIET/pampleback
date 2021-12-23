@@ -23,18 +23,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("questions")
 public class QuestionController {
+    /**
+     * QuestionService questionService.
+     */
     private QuestionService questionService;
 
+    /**
+     * ResponseService responseService.
+     */
     private ResponseService responseService;
 
     /**
      * Controller of the questionController.
-     * 
      * @param questionService
      * @param responseService
      */
     @Autowired
-    public QuestionController(QuestionService questionService, ResponseService responseService) {
+    public QuestionController(final QuestionService questionService, final ResponseService responseService) {
         this.questionService = questionService;
         this.responseService = responseService;
     }
@@ -42,7 +47,6 @@ public class QuestionController {
     /**
      * way to get all questions with their response.
      * getMapping.
-     * 
      * @return List<Question>
      */
     @GetMapping
@@ -53,7 +57,6 @@ public class QuestionController {
     /**
      * way to get all responses without their question.
      * getMapping.
-     * 
      * @return List<Response>
      */
     @GetMapping(path = "/responses")
@@ -64,7 +67,6 @@ public class QuestionController {
     /**
      * way to get one question by his id.
      * getMapping
-     * 
      * @param id
      * @return Type
      */
@@ -76,7 +78,6 @@ public class QuestionController {
     /**
      * way to get one response by his id.
      * getMapping
-     * 
      * @param id
      * @return Type
      */
@@ -88,7 +89,6 @@ public class QuestionController {
     /**
      * way to get one question by his ennonce.
      * getMapping
-     * 
      * @param ennonce
      * @return question
      */
@@ -100,7 +100,6 @@ public class QuestionController {
     /**
      * way to create an question and it response.
      * postMapping.
-     * 
      * @param question
      * @return questionCreated
      */
@@ -113,7 +112,6 @@ public class QuestionController {
 
     /**
      * way to update the whole question and it response.
-     * 
      * @param question
      * @param qId
      * @param rId
@@ -129,7 +127,6 @@ public class QuestionController {
 
     /**
      * way to update only the question.
-     * 
      * @param question
      * @param qId
      * @return the question updated and it response.
@@ -141,7 +138,6 @@ public class QuestionController {
 
     /**
      * way to update only the response.
-     * 
      * @param response
      * @param rId
      * @return the response updated.
@@ -153,7 +149,6 @@ public class QuestionController {
 
     /**
      * way to delete question and it response if cascade work.
-     * 
      * @param id
      */
     @DeleteMapping(path = "/{id}")

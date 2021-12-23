@@ -20,7 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("types")
 public class TypeController {
-    
+
+    /**
+     * TypeService typeService.
+     */
     private TypeService typeService;
 
     /**
@@ -28,7 +31,7 @@ public class TypeController {
      * @param typeService
      */
     @Autowired
-    public TypeController(TypeService typeService) {
+    public TypeController(final TypeService typeService) {
         this.typeService = typeService;
     }
 
@@ -57,7 +60,7 @@ public class TypeController {
      * way to get one type by his name.
      * getMapping
      * @param name
-     * @return
+     * @return Type
      */
     @GetMapping(path = "/name/{name}")
     public Type getTypeByName(@PathVariable final String name) {
