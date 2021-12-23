@@ -39,7 +39,6 @@ public class TypeController {
      */
     @GetMapping
     public List<Type> getAllTypes() {
-        System.out.println("get alltypes");
         return typeService.getAllTypes();
     }
 

@@ -8,6 +8,8 @@ public class UserFromClientDto {
 
     private Long typeId;
 
+    private String societe;
+
     public String getName() {
         return name;
     }
@@ -32,6 +34,14 @@ public class UserFromClientDto {
         this.typeId = typeId;
     }
 
+    public String getSociete() {
+        return societe;
+    }
+
+    public void setSociete(String societe) {
+        this.societe = societe;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -39,9 +49,10 @@ public class UserFromClientDto {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((password == null) ? 0 : password.hashCode());
-        result = prime * result + (int) (typeId ^ (typeId >>> 32));
         result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((password == null) ? 0 : password.hashCode());
+        result = prime * result + ((societe == null) ? 0 : societe.hashCode());
+        result = prime * result + ((typeId == null) ? 0 : typeId.hashCode());
         return result;
     }
 
@@ -50,33 +61,33 @@ public class UserFromClientDto {
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
+        if (this == obj)
             return true;
-        }
-        if (obj == null) {
+        if (obj == null)
             return false;
-        }
-        if (getClass() != obj.getClass()) {
+        if (getClass() != obj.getClass())
             return false;
-        }
         UserFromClientDto other = (UserFromClientDto) obj;
-        if (password == null) {
-            if (other.password != null) {
-                return false;
-            }
-        } else if (!password.equals(other.password)) {
-            return false;
-        }
-        if (typeId != other.typeId) {
-            return false;
-        }
         if (name == null) {
-            if (other.name != null) {
+            if (other.name != null)
                 return false;
-            }
-        } else if (!name.equals(other.name)) {
+        } else if (!name.equals(other.name))
             return false;
-        }
+        if (password == null) {
+            if (other.password != null)
+                return false;
+        } else if (!password.equals(other.password))
+            return false;
+        if (societe == null) {
+            if (other.societe != null)
+                return false;
+        } else if (!societe.equals(other.societe))
+            return false;
+        if (typeId == null) {
+            if (other.typeId != null)
+                return false;
+        } else if (!typeId.equals(other.typeId))
+            return false;
         return true;
     }
 
@@ -85,8 +96,7 @@ public class UserFromClientDto {
      */
     @Override
     public String toString() {
-        return "UserFromClientDto [password=" + password + ", typeId=" + typeId + ", username=" + name
-                + "]";
+        return "UserFromClientDto [name=" + name + ", password=" + password + ", societe=" + societe + ", typeId="
+                + typeId + "]";
     }
-
 }

@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "users")
@@ -17,19 +19,28 @@ public final class User implements Serializable {
     private static final long serialVersionUID = 346733376635L;
 
     @Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
-    private long id;
+    private Long id;
 
+    @NotBlank
+    @NotNull
     @Column(name = "user_name")
     private String name;
 
+    @NotBlank
+    @NotNull
     @Column(name = "user_password")
     private String password;
 
+    @NotBlank
+    @NotNull
     @JoinColumn(name="user_type_id", referencedColumnName = "type_id")
     @ManyToOne
     private Type type;
+
+    @Column(name = "user_societe")
+    private String societe;
 
     public Long getId() {
         return id;
@@ -63,6 +74,14 @@ public final class User implements Serializable {
         this.type = type;
     }
 
+    public String getSociete() {
+        return societe;
+    }
+
+    public void setSociete(String societe) {
+        this.societe = societe;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -70,9 +89,10 @@ public final class User implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + (int) (id ^ (id >>> 32));
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((password == null) ? 0 : password.hashCode());
+        result = prime * result + ((societe == null) ? 0 : societe.hashCode());
         result = prime * result + ((type == null) ? 0 : type.hashCode());
         return result;
     }
@@ -92,7 +112,11 @@ public final class User implements Serializable {
             return false;
         }
         User other = (User) obj;
-        if (id != other.id) {
+        if (id == null) {
+            if (other.id != null) {
+                return false;
+            }
+        } else if (!id.equals(other.id)) {
             return false;
         }
         if (name == null) {
@@ -109,6 +133,13 @@ public final class User implements Serializable {
         } else if (!password.equals(other.password)) {
             return false;
         }
+        if (societe == null) {
+            if (other.societe != null) {
+                return false;
+            }
+        } else if (!societe.equals(other.societe)) {
+            return false;
+        }
         if (type == null) {
             if (other.type != null) {
                 return false;
@@ -119,8 +150,12 @@ public final class User implements Serializable {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return "User [id=" + id + ", name=" + name + ", password=" + password + ", type=" + type + "]";
+        return "User [id=" + id + ", name=" + name + ", password=" + password + ", societe=" + societe + ", type="
+                + type + "]";
     }
 }

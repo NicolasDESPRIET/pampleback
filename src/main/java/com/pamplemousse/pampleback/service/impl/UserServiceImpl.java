@@ -27,7 +27,10 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, TypeRepository typeRepository, UserMapper userMapper) {
+    public UserServiceImpl(
+            UserRepository userRepository,
+            TypeRepository typeRepository,
+            UserMapper userMapper) {
         this.userRepository = userRepository;
         this.typeRepository = typeRepository;
         this.userMapper = userMapper;
@@ -40,7 +43,6 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllUsers() {
         List<User> list = userRepository.findAll();
         return list;
-
     }
 
     /**
@@ -82,7 +84,6 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User createUser(UserFromClientDto userFromClientDto) {
-        System.out.println(userFromClientDto);
         Optional<User> userNameTest = userRepository.findByName(userFromClientDto.getName());
         if (!userNameTest.isEmpty()) {
             throw new BadRequestException(ExceptionMessageConstants.USER_NAME_USED_IN_DB);
@@ -94,7 +95,6 @@ public class UserServiceImpl implements UserService {
 
         User userCreated = userMapper.UserDtoToUser(userFromClientDto);
         userCreated.setType(type);
-        System.out.println(userCreated);
 
         userCreated = userRepository.save(userCreated);
 
