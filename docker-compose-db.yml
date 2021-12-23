@@ -1,4 +1,5 @@
 version: '3.3'
+
 services:
   db-plemousse:
     image: mysql:8.0.17
@@ -23,6 +24,11 @@ services:
       # Where our data will be persisted
     volumes:
       - my-db:/var/lib/mysql
-# Names our volume
+    networks:
+      my-networks:
+
 volumes:
   my-db:
+
+networks:
+  my-networks:
