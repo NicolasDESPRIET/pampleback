@@ -53,12 +53,12 @@ public interface UserService {
      * @throws BadRequestException.
      * @throws NotFoundException.
      */
-	User updateUser(UserFromClientDto userFromClientDto, Long id);
+    User updateUser(UserFromClientDto userFromClientDto, Long id);
 
     /**
      * delete the user by his id.
      * @param id the id of the user.
      * @throws NotFoundException.s
      */
-	void deleteUser(Long id);
+    void deleteUser(Long id);
 }

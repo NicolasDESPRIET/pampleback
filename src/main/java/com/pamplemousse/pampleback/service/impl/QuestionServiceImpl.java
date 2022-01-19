@@ -1,15 +1,16 @@
 package com.pamplemousse.pampleback.service.impl;
 
+ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.pamplemousse.pampleback.dto.QuestionNoResponseDto;
 import com.pamplemousse.pampleback.exception.ExceptionMessageConstants;
 import com.pamplemousse.pampleback.exception.server.BadRequestException;
 import com.pamplemousse.pampleback.exception.server.NotFoundException;
+import com.pamplemousse.pampleback.mapper.QuestionMapper;
 import com.pamplemousse.pampleback.model.Question;
-import com.pamplemousse.pampleback.model.Response;
 import com.pamplemousse.pampleback.repository.QuestionRepository;
-import com.pamplemousse.pampleback.repository.ResponseRepository;
 import com.pamplemousse.pampleback.service.QuestionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,19 +25,20 @@ public class QuestionServiceImpl implements QuestionService {
     private QuestionRepository questionRepository;
 
     /**
-     * ResponseRepository.
+     * questionMapper.
      */
-    private ResponseRepository responseRepository;
+    private QuestionMapper questionMapper;
 
     /**
-     * Constructor of the service.
+     * constructor of the service.
+     * 
      * @param questionRepository
-     * @param responseRepository
+     * @param questionMapper
      */
     @Autowired
-    public QuestionServiceImpl(final QuestionRepository questionRepository, final ResponseRepository responseRepository) {
+    public QuestionServiceImpl(final QuestionRepository questionRepository, final QuestionMapper questionMapper) {
         this.questionRepository = questionRepository;
-        this.responseRepository = responseRepository;
+        this.questionMapper = questionMapper;
     }
 
     /**
@@ -44,18 +46,7 @@ public class QuestionServiceImpl implements QuestionService {
      */
     @Override
     public List<Question> getAllQuestions() {
-        List<Question> list = questionRepository.findAll();
-        return list;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Question getQuestionByEnnonce(final String ennonce) {
-        Question question = questionRepository.findByEnnonce(ennonce)
-                .orElseThrow(() -> new NotFoundException(ExceptionMessageConstants.QUESTION_NOT_FOUND_IN_DB));
-        return question;
+        return questionRepository.findAll();
     }
 
     /**
@@ -72,14 +63,20 @@ public class QuestionServiceImpl implements QuestionService {
      * {@inheritDoc}
      */
     @Override
-    public Question createQuestion(final Question question, final Long responseId) {
-        Optional<Question> existingQuestion = questionRepository.findByEnnonce(question.getEnnonce());
-        if (!existingQuestion.isEmpty()) {
+    public Question getQuestionByEnnonce(final String ennonce) {
+        Question question = questionRepository.findByEnnonce(ennonce)
+                .orElseThrow(() -> new NotFoundException(ExceptionMessageConstants.QUESTION_NOT_FOUND_IN_DB));
+        return question;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Question createQuestion(final Question question) {
+        if (!questionRepository.findByEnnonce(question.getEnnonce()).isEmpty()) {
             throw new BadRequestException(ExceptionMessageConstants.QUESTION_ENNONCE_USED_IN_DB);
         }
-        Response response = responseRepository.findById(responseId)
-                .orElseThrow(() -> new BadRequestException(ExceptionMessageConstants.RESPONSE_NOT_FOUND_IN_DB));
-        question.setResponse(response);
         return questionRepository.save(question);
     }
 
@@ -88,18 +85,16 @@ public class QuestionServiceImpl implements QuestionService {
      */
     @Override
     public Question updateQuestion(final Question question, final Long id) {
-        Optional<Question> questionNameTest = questionRepository.findByEnnonce(question.getEnnonce());
-        if (!questionNameTest.isEmpty()) {
+        Optional<Question> questionEnnonce = questionRepository.findByEnnonce(question.getEnnonce());
+        if (!questionEnnonce.isEmpty()) {
             throw new BadRequestException(ExceptionMessageConstants.QUESTION_ENNONCE_USED_IN_DB);
         }
-
-        responseRepository.findById(question.getResponse().getId())
-                .orElseThrow(() -> new BadRequestException(ExceptionMessageConstants.RESPONSE_NOT_FOUND_IN_DB));
-
-        questionRepository.findById(id)
-                .orElseThrow(() -> new BadRequestException(ExceptionMessageConstants.QUESTION_ID_NOT_FOUND_IN_DB));
+        if (question.getId() != id) {
+            throw new BadRequestException(ExceptionMessageConstants.QUESTION_ID_ERROR);
+        }
         question.setId(id);
-        return questionRepository.save(question);
+        Question questionUpdated = questionRepository.save(question);
+        return questionUpdated;
     }
 
     /**
@@ -108,8 +103,22 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public void deleteQuestion(final Long id) {
         Question question = questionRepository.findById(id)
-                .orElseThrow(() -> new BadRequestException(ExceptionMessageConstants.QUESTION_ID_NOT_FOUND_IN_DB));
+                .orElseThrow(() -> new NotFoundException(ExceptionMessageConstants.QUESTION_ID_NOT_FOUND_IN_DB));
         questionRepository.delete(question);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public QuestionNoResponseDto getQuestionByIdNoResponseValue(final Long id) {
+        Question question = getQuestionByid(id);
+        QuestionNoResponseDto questionNoResponseDto = questionMapper.questionToQuestionNoResponseDto(question);
+        List<String> list = new ArrayList<String>();
+        question.getResponses().keySet().stream().forEach(x -> list.add(x));
+        questionNoResponseDto.setResponsesList(list);
+        System.out.println(questionNoResponseDto);
+        return questionNoResponseDto;
     }
 
 }

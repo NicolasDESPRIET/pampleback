@@ -2,13 +2,11 @@ package com.pamplemousse.pampleback.controller;
 
 import java.util.List;
 
+import com.pamplemousse.pampleback.dto.QuestionNoResponseDto;
 import com.pamplemousse.pampleback.model.Question;
-import com.pamplemousse.pampleback.model.Response;
 import com.pamplemousse.pampleback.service.QuestionService;
-import com.pamplemousse.pampleback.service.ResponseService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,37 +14,32 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
 
 @RestController
 @RequestMapping("questions")
 public class QuestionController {
     /**
-     * QuestionService questionService.
+     * TypeService typeService.
      */
     private QuestionService questionService;
 
     /**
-     * ResponseService responseService.
-     */
-    private ResponseService responseService;
-
-    /**
-     * Controller of the questionController.
+     * constructor of the controller.
+     *
      * @param questionService
-     * @param responseService
      */
     @Autowired
-    public QuestionController(final QuestionService questionService, final ResponseService responseService) {
+    public QuestionController(final QuestionService questionService) {
         this.questionService = questionService;
-        this.responseService = responseService;
     }
 
     /**
-     * way to get all questions with their response.
-     * getMapping.
+     * way to get all Questions.
+     * getMapping
+     *
      * @return List<Question>
      */
     @GetMapping
@@ -55,20 +48,10 @@ public class QuestionController {
     }
 
     /**
-     * way to get all responses without their question.
-     * getMapping.
-     * @return List<Response>
-     */
-    @GetMapping(path = "/responses")
-    public List<Response> getAllResponses() {
-        return responseService.getAllResponses();
-    }
-
-    /**
-     * way to get one question by his id.
+     * way to get question by his id.
      * getMapping
      * @param id
-     * @return Type
+     * @return question
      */
     @GetMapping(path = "/{id}")
     public Question getQuestionById(@PathVariable final Long id) {
@@ -76,18 +59,19 @@ public class QuestionController {
     }
 
     /**
-     * way to get one response by his id.
+     * way to get Question by id with response values.
      * getMapping
+     *
      * @param id
-     * @return Type
+     * @return QuestionNoResponseDto
      */
-    @GetMapping(path = "/responses/{id}")
-    public Response getResponseById(@PathVariable final Long id) {
-        return responseService.getResponseByid(id);
+    @GetMapping(path = "/{id}/noR")
+    public QuestionNoResponseDto getQuestionNoResponseDtoById(@PathVariable final Long id) {
+        return questionService.getQuestionByIdNoResponseValue(id);
     }
 
     /**
-     * way to get one question by his ennonce.
+     * way to get question by his ennonce.
      * getMapping
      * @param ennonce
      * @return question
@@ -98,57 +82,32 @@ public class QuestionController {
     }
 
     /**
-     * way to create an question and it response.
-     * postMapping.
+     * way to create question.
+     * postMapping
      * @param question
-     * @return questionCreated
+     * @return question
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public @ResponseBody Question createQuestion(@RequestBody final Question question) {
-        Response response = responseService.createResponse(question.getResponse());
-        return questionService.createQuestion(question, response.getId());
+    public Question createQuestion(@RequestBody final Question question) {
+        return questionService.createQuestion(question);
     }
 
     /**
-     * way to update the whole question and it response.
+     * way to update question by id.
+     * putMapping
      * @param question
-     * @param qId
-     * @param rId
-     * @return the whole question and it response.
+     * @param id
+     * @return question
      */
-    @PutMapping(path = "/{qId}/{rId}")
-    public Question updateWholeQuestion(@RequestBody final Question question, @PathVariable final Long qId,
-            @PathVariable final Long rId) {
-        Response response = responseService.updateResponse(question.getResponse(), rId);
-        question.setResponse(response);
-        return questionService.updateQuestion(question, qId);
+    @PutMapping(path = "/{id}")
+    public Question updateQuestion(@RequestBody final Question question, @PathVariable final Long id) {
+        return questionService.updateQuestion(question, id);
     }
 
     /**
-     * way to update only the question.
-     * @param question
-     * @param qId
-     * @return the question updated and it response.
-     */
-    @PutMapping(path = "/{qId}")
-    public Question updateOnlyQuestion(@RequestBody final Question question, @PathVariable final Long qId) {
-        return questionService.updateQuestion(question, qId);
-    }
-
-    /**
-     * way to update only the response.
-     * @param response
-     * @param rId
-     * @return the response updated.
-     */
-    @PutMapping(path = "/{rId}")
-    public Response updateOnlyResponse(@RequestBody final Response response, @PathVariable final Long rId) {
-        return responseService.updateResponse(response, rId);
-    }
-
-    /**
-     * way to delete question and it response if cascade work.
+     * way to delete question by id.
+     * deleteMapping
      * @param id
      */
     @DeleteMapping(path = "/{id}")

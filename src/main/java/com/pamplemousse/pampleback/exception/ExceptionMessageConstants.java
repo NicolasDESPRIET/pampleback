@@ -19,6 +19,5 @@ public final class ExceptionMessageConstants {
     public static final String QUESTION_ID_NOT_FOUND_IN_DB = "no question with this id found in db";
     public static final String QUESTION_NOT_FOUND_IN_DB = "no question with this ennonce found in db";
     public static final String QUESTION_ENNONCE_USED_IN_DB = "Ennonce Question Already used in db";
-    // Response Message Exception
-    public static final String RESPONSE_NOT_FOUND_IN_DB = "no response with this id persisted in the db";
+    public static final String QUESTION_ID_ERROR = "id with question update and question in db are different";
 }
