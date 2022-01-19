@@ -1,15 +1,16 @@
 package com.pamplemousse.pampleback.model;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -34,9 +35,10 @@ public final class Question implements Serializable {
     /**
      * Response response.
      */
-    @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "q_r_id", referencedColumnName = "r_id")
-    private Response response;
+    @ElementCollection
+    @Column(name = "response_value")
+    @MapKeyColumn(name = "response_text")
+    private Map<String, Integer> responses = new HashMap<String, Integer>();
 
     /**
      * getter id.
@@ -71,19 +73,19 @@ public final class Question implements Serializable {
     }
 
     /**
-     * getter response.
-     * @return response
+     * getter responses.
+     * @return responses
      */
-    public Response getResponse() {
-        return response;
+    public Map<String, Integer> getResponses() {
+        return responses;
     }
 
     /**
-     * setter response.
-     * @param response
+     * setter responses.
+     * @param responses
      */
-    public void setResponse(final Response response) {
-        this.response = response;
+    public void setResponses(final Map<String, Integer> responses) {
+        this.responses = responses;
     }
 
     /**
@@ -95,7 +97,7 @@ public final class Question implements Serializable {
         int result = 1;
         result = prime * result + ((ennonce == null) ? 0 : ennonce.hashCode());
         result = prime * result + (int) (id ^ (id >>> 32));
-        result = prime * result + ((response == null) ? 0 : response.hashCode());
+        result = prime * result + ((responses == null) ? 0 : responses.hashCode());
         return result;
     }
 
@@ -103,7 +105,7 @@ public final class Question implements Serializable {
      * {@inheritDoc}
      */
     @Override
-    public boolean equals(final Object obj) {
+    public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
@@ -124,11 +126,11 @@ public final class Question implements Serializable {
         if (id != other.id) {
             return false;
         }
-        if (response == null) {
-            if (other.response != null) {
+        if (responses == null) {
+            if (other.responses != null) {
                 return false;
             }
-        } else if (!response.equals(other.response)) {
+        } else if (!responses.equals(other.responses)) {
             return false;
         }
         return true;
@@ -139,6 +141,7 @@ public final class Question implements Serializable {
      */
     @Override
     public String toString() {
-        return "Question [ennonce=" + ennonce + ", id=" + id + ", response=" + response + "]";
+        return "Question [ennonce=" + ennonce + ", id=" + id + ", responses=" + responses + "]";
     }
+    
 }
