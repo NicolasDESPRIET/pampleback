@@ -12,7 +12,7 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 
     /**
      * function used to find a type by his ennonce.
-     * 
+     *
      * @param ennonce
      * @return Optional<Question>
      */

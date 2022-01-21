@@ -117,7 +117,6 @@ public class QuestionServiceImpl implements QuestionService {
         List<String> list = new ArrayList<String>();
         question.getResponses().keySet().stream().forEach(x -> list.add(x));
         questionNoResponseDto.setResponsesList(list);
-        System.out.println(questionNoResponseDto);
         return questionNoResponseDto;
     }
 
