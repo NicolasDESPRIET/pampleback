@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.pamplemousse.pampleback.dto.QcmFromClientDto;
 import com.pamplemousse.pampleback.dto.QcmToClientNoRDto;
+import com.pamplemousse.pampleback.dto.QuestionNoResponseDto;
 import com.pamplemousse.pampleback.exception.ExceptionMessageConstants;
 import com.pamplemousse.pampleback.exception.server.BadRequestException;
 import com.pamplemousse.pampleback.exception.server.NotFoundException;
@@ -68,7 +69,7 @@ public class QcmServiceImpl implements QcmService {
             lClientNoRDtos.add(getOneByIdnoR(qcm.getId()));
         });
 
-        return null;
+        return lClientNoRDtos;
     }
 
     /**
@@ -88,10 +89,11 @@ public class QcmServiceImpl implements QcmService {
     public QcmToClientNoRDto getOneByIdnoR(Long id) {
         Qcm qcm = getOneById(id);
         QcmToClientNoRDto qcmToClientNoRDto = qcmMapper.qcmToQcmToClientNoRDto(qcm);
+        List<QuestionNoResponseDto> list = new ArrayList<QuestionNoResponseDto>();
         qcm.getQcmQuestion().stream().forEach((question) -> {
-            qcmToClientNoRDto.getQcmQuestion().add(
-                    questionService.getQuestionByIdNoResponseValue(question.getId()));
+            list.add(questionService.getQuestionByIdNoResponseValue(question.getId()));
         });
+        qcmToClientNoRDto.setQcmQuestion(list);
         return qcmToClientNoRDto;
     }
 
@@ -114,6 +116,7 @@ public class QcmServiceImpl implements QcmService {
             throw new BadRequestException(ExceptionMessageConstants.QCM_NAME_USED_IN_DB);
         }
         Qcm qcm = qcmMapper.qcmFromClientDtoToQcm(qcmFromClientDto);
+        qcm.setQcmQuestion(new ArrayList<Question>());
         return qcmRepository.save(qcm);
     }
 
@@ -127,6 +130,9 @@ public class QcmServiceImpl implements QcmService {
             throw new BadRequestException(ExceptionMessageConstants.QCM_NAME_USED_IN_DB);
         }
         qcmMapper.updateQcmFromDto(qcmFromClientDto, qcm);
+        if (qcm.getQcmQuestion() == null ){
+            qcm.setQcmQuestion(new ArrayList<Question>());
+        }
         return qcmRepository.save(qcm);
     }
 

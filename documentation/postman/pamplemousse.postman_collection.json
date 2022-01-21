@@ -446,7 +446,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"ennonce\" : \"toto est bête ?\",\r\n    \"responses\" : {\r\n        \"oui\" : 1,\r\n        \"non\" : 0\r\n    }\r\n}",
+							"raw": "{\r\n    \"ennonce\" : \"toto est bête ? ou pas ?\",\r\n    \"responses\" : {\r\n        \"oui\" : 1,\r\n        \"non\" : 0\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -454,14 +454,21 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8091/questions",
+							"raw": "http://localhost:8091/questions/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8091",
 							"path": [
-								"questions"
+								"questions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -532,7 +539,280 @@
 		},
 		{
 			"name": "QCm",
-			"item": []
+			"item": [
+				{
+					"name": "get all qcm",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/qcm",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"qcm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all qcmNoR",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/qcm/nor",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"qcm",
+								"nor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create qcm",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"qcm3\",\r\n    \"description\" : \"un qcm de test 3\",\r\n    \"author\" : \"jean michel 3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/qcm",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"qcm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update qcm",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"qcm1 modifié\",\r\n    \"description\" : \"un qcm de test modifié\",\r\n    \"author\" : \"jean michel modifié\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/qcm/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"qcm",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/qcm/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"qcm",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one by name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/qcm/name/:name",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"qcm",
+								"name",
+								":name"
+							],
+							"variable": [
+								{
+									"key": "name",
+									"value": "qcm2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one by id NoR",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/qcm/nor/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"qcm",
+								"nor",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete qcm",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/qcm/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"qcm",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add question in qcm",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/qcm/:qcmId/add/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"qcm",
+								":qcmId",
+								"add",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "qcmId",
+									"value": "2"
+								},
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove question in qcm",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/qcm/:qcmId/remove/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"qcm",
+								":qcmId",
+								"remove",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "qcmId",
+									"value": "1"
+								},
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

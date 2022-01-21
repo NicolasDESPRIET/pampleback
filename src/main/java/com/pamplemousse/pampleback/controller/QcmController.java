@@ -90,12 +90,12 @@ public class QcmController {
     @PutMapping(path = "{qcmId}/add/{id}")
     public Qcm addQuestionToQcmById(@PathVariable final Long qcmId, @PathVariable final Long id) {
         Question question = questionService.getQuestionByid(id);
-        return qcmService.addQuestion(id, question);
+        return qcmService.addQuestion(qcmId, question);
     }
 
     @PutMapping(path = "{qcmId}/remove/{id}")
     public Qcm removeQuestionToQcmById(@PathVariable final Long qcmId, @PathVariable final Long id) {
         Question question = questionService.getQuestionByid(id);
-        return qcmService.removeQuestion(id, question);
+        return qcmService.removeQuestion(qcmId, question);
     }
 }
