@@ -20,4 +20,11 @@ public final class ExceptionMessageConstants {
     public static final String QUESTION_NOT_FOUND_IN_DB = "no question with this ennonce found in db";
     public static final String QUESTION_ENNONCE_USED_IN_DB = "Ennonce Question Already used in db";
     public static final String QUESTION_ID_ERROR = "id with question update and question in db are different";
+
+    // QCM Message Exception
+    public static final String QCM_ID_NOT_FOUND_IN_DB = "no qcm with this id found in db";
+    public static final String QCM_NOT_FOUND_IN_DB = "no qcm with this name found in db";
+    public static final String QCM_NAME_USED_IN_DB = "QCM name Already used in db";
+    public static final String QCM_ID_ERROR = "id with qcm update and qcm in db are different";
+    public static final String QUESTION_WITH_THIS_ENNONCE_ALREADY_IN_QCM = "question with this ennonce already in the qcm";
 }

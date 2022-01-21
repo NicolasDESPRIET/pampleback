@@ -360,26 +360,6 @@
 					"response": []
 				},
 				{
-					"name": "GetAllResponse",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8091/questions/responses",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8091",
-							"path": [
-								"questions",
-								"responses"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "getQuestionByID",
 					"request": {
 						"method": "GET",
@@ -433,12 +413,12 @@
 					"response": []
 				},
 				{
-					"name": "getReponseById",
+					"name": "getQuestionByIDnoR",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8091/questions/responses/:id",
+							"raw": "http://localhost:8091/questions/:id/noR",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -446,7 +426,70 @@
 							"port": "8091",
 							"path": [
 								"questions",
-								"responses",
+								":id",
+								"noR"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createQuestion",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ennonce\" : \"toto est bête ?\",\r\n    \"responses\" : {\r\n        \"oui\" : 1,\r\n        \"non\" : 0\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/questions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"questions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Question",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : 1,\r\n    \"ennonce\" : \"toto est-il bête ?\",\r\n    \"responses\" : {\r\n        \"non\" : 1,\r\n        \"oui\" : 0\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/questions/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"questions",
 								":id"
 							],
 							"variable": [
@@ -460,76 +503,7 @@
 					"response": []
 				},
 				{
-					"name": "createQuestionAndResponse",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"ennonce\": \"Quel est le comble pour un  electricien :\",\r\n    \"response\": {\r\n        \"values\": {\r\n            \"d'être au courant\": 1,\r\n            \"d'avoir une araignée au plafond\": 0,\r\n            \"d'être à la masse\": 0\r\n        }\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8091/questions/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8091",
-							"path": [
-								"questions",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "updateWholeQuestionResponse",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"ennonce\": \"Quel est le comble pour un pompier :\",\r\n    \"response\": {\r\n        \"values\": {\r\n            \"de peter le feu\": 1,\r\n            \"d'avoir une araignée au plafond\": 0,\r\n            \"d'être à la masse\": 0\r\n        }\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8091/questions/:qId/:rId",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8091",
-							"path": [
-								"questions",
-								":qId",
-								":rId"
-							],
-							"variable": [
-								{
-									"key": "qId",
-									"value": "1"
-								},
-								{
-									"key": "rId",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "deleteQuestionResponse",
+					"name": "delete Question",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -555,6 +529,10 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "QCm",
+			"item": []
 		}
 	]
 }

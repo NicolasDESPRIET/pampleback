@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.pamplemousse.pampleback.dto.QuestionNoResponseDto;
 import com.pamplemousse.pampleback.model.Question;
+import com.pamplemousse.pampleback.service.QcmService;
 import com.pamplemousse.pampleback.service.QuestionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,14 @@ import org.springframework.http.HttpStatus;
 @RequestMapping("questions")
 public class QuestionController {
     /**
-     * TypeService typeService.
+     * QuestionService questionService.
      */
     private QuestionService questionService;
+
+    /**
+     * QcmService qcmService.
+     */
+    private QcmService qcmService;
 
     /**
      * constructor of the controller.
@@ -32,8 +38,9 @@ public class QuestionController {
      * @param questionService
      */
     @Autowired
-    public QuestionController(final QuestionService questionService) {
+    public QuestionController(final QuestionService questionService, final QcmService qcmService) {
         this.questionService = questionService;
+        this.qcmService = qcmService;
     }
 
     /**
@@ -82,15 +89,18 @@ public class QuestionController {
     }
 
     /**
-     * way to create question.
+     * way to create question and add it to a qcm.
      * postMapping
      * @param question
+     * @param id
      * @return question
      */
-    @PostMapping
+    @PostMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public Question createQuestion(@RequestBody final Question question) {
-        return questionService.createQuestion(question);
+    public Question createQuestion(@RequestBody final Question question, @PathVariable final Long id) {
+        Question questionCreated = questionService.createQuestion(question);
+        qcmService.addQuestion(id, questionCreated);
+        return questionCreated;
     }
 
     /**
