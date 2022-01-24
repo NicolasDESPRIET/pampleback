@@ -27,4 +27,9 @@ public final class ExceptionMessageConstants {
     public static final String QCM_NAME_USED_IN_DB = "QCM name Already used in db";
     public static final String QCM_ID_ERROR = "id with qcm update and qcm in db are different";
     public static final String QUESTION_WITH_THIS_ENNONCE_ALREADY_IN_QCM = "question with this ennonce already in the qcm";
+
+    // parcour Message Exception
+    public static final String PARCOUR_ID_NOT_FOUND_IN_DB = "no parcour with this id found in db";
+    public static final String PARCOUR_NOT_FOUND_IN_DB = "no parcour found in db";
+    public static final String PARCOUR_DATE_BAD_FORMAT = "this format of date is wrong, use dd/MM/yyyy";
 }

@@ -60,7 +60,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Stagiaire\"\r\n}",
+							"raw": "{\r\n    \"name\":\"Admin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -253,7 +253,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Nicolas D\",\r\n    \"password\": \"azerty123\",\r\n    \"typeId\": 2,\r\n    \"societe\": \"capgemini\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Nicolas D\",\r\n    \"password\": \"azerty123\",\r\n    \"typeId\": 1,\r\n    \"societe\": \"capgemini\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -801,11 +801,237 @@
 							"variable": [
 								{
 									"key": "qcmId",
-									"value": "1"
+									"value": "2"
 								},
 								{
 									"key": "id",
 									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Parcour",
+			"item": [
+				{
+					"name": "get all parcours",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/parcour/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"parcour",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all by date",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\":\"2022-01-24\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/parcour/date",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"parcour",
+								"date"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all by user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/parcour/user/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"parcour",
+								"user",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all by qcm",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/parcour/qcm/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"parcour",
+								"qcm",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/parcour/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"parcour",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create parcour",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"time\" : 112322.123,\r\n    \"note\" : \"10/20\",\r\n    \"nbSucces\" : 10,\r\n    \"nbFailed\" : 3,\r\n    \"nbBlank\" : 7,\r\n    \"qcmId\" : 2,\r\n    \"stagiaireId\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/parcour",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"parcour"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit parcours",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"time\" : 1222225.123,\r\n    \"note\" : \"10/20\",\r\n    \"nbSucces\" : 5,\r\n    \"nbFailed\" : 10,\r\n    \"nbBlank\" : 7,\r\n    \"qcmId\" : 1,\r\n    \"stagiaireId\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/parcour/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"parcour",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/parcour/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"parcour",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
 								}
 							]
 						}
