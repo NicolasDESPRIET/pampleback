@@ -8,7 +8,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @SpringBootApplication
 public class PamplebackApplication {
 
-	public static void main(String[] args) {
+	/**
+	 * Application Launcher.
+	 * @param args
+	 */
+	public static void main(final String[] args) {
 		SpringApplication.run(PamplebackApplication.class, args);
 	}
 

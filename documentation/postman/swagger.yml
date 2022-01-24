@@ -1,0 +1,61 @@
+openapi: 3.0.3
+info:
+  title: Pampleback APi
+  description: this is the api for the project newQCMPLUS, the back is call PAMPLEBACK, springboot app.
+  version: 1.1.0
+servers:
+  - url: "http://localhost:8091"
+
+tags:
+  - name: type
+    description: route to types
+  - name: user
+    description: route to users
+  - name: question
+    description: route to questions and responses
+
+paths:
+  /types:
+    post:
+      tags: 
+        - type
+      description: create a type in db
+      summary: create a type in db
+      operationId: createType
+      requestBody:
+        description: "type info, the id should be null cause it's auto configure by code."
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Type"
+      responses:
+        201:
+          description: "the type is created."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Type"
+
+components:
+  securitySchemes:
+    bearerAtuh:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  
+  schemas:
+    Type:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 12
+          description: "the id of the type."
+        name:
+          type: string
+          example: "stagiaire"
+          description: "the id of the type."
+
+    
+

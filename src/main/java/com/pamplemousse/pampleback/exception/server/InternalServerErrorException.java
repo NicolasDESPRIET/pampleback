@@ -9,7 +9,7 @@ public final class InternalServerErrorException extends ResponseStatusException 
      * Constructor with message.
      * @param reason {@link com.pamplemousse.pampleback.exception.ExceptionMessageConstants }
      */
-    public InternalServerErrorException(String reason) {
+    public InternalServerErrorException(final String reason) {
         super(HttpStatus.INTERNAL_SERVER_ERROR, reason);
     }
 

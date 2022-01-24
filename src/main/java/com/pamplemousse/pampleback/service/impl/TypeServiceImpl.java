@@ -16,21 +16,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class TypeServiceImpl implements TypeService {
 
+    /**
+     * TypeRepository.
+     */
     private TypeRepository typeRepository;
 
+    /**
+     * constructor of the service.
+     * @param typeRepository
+     */
     @Autowired
-    public TypeServiceImpl(TypeRepository typeRepository) {
+    public TypeServiceImpl(final TypeRepository typeRepository) {
         this.typeRepository = typeRepository;
     }
-
-    /**
-     * Logger Instance if need
-     * 
-     * import org.apache.logging.log4j.LogManager; import
-     * org.apache.logging.log4j.Logger;
-     * 
-     * private static Logger log = LogManager.getLogger(Object.class);
-     */
 
     /**
      * {@inheritDoc}
@@ -45,7 +43,7 @@ public class TypeServiceImpl implements TypeService {
      * {@inheritDoc}
      */
     @Override
-    public Type getTypeByid(Long id) {
+    public Type getTypeByid(final Long id) {
         Type type = typeRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(ExceptionMessageConstants.TYPE_NOT_FOUND_IN_DB));
         return type;
@@ -55,7 +53,7 @@ public class TypeServiceImpl implements TypeService {
      * {@inheritDoc}
      */
     @Override
-    public Type getTypeByName(String name) {
+    public Type getTypeByName(final String name) {
         Type type = typeRepository.findByName(name)
                 .orElseThrow(() -> new NotFoundException(ExceptionMessageConstants.TYPE_NOT_FOUND_IN_DB));
         return type;
@@ -65,7 +63,7 @@ public class TypeServiceImpl implements TypeService {
      * {@inheritDoc}
      */
     @Override
-    public Type createType(Type type) {
+    public Type createType(final Type type) {
         if (!typeRepository.findByName(type.getName()).isEmpty()) {
             throw new BadRequestException(ExceptionMessageConstants.TYPE_NAME_ALREADY_USED_IN_DB);
         }
@@ -78,7 +76,7 @@ public class TypeServiceImpl implements TypeService {
      * {@inheritDoc}
      */
     @Override
-    public Type updateType(Type type, Long id) {
+    public Type updateType(final Type type, final Long id) {
         Optional<Type> typeName = typeRepository.findByName(type.getName());
         if (!typeName.isEmpty() && type.getId() != typeName.get().getId()) {
             throw new BadRequestException(ExceptionMessageConstants.TYPE_NAME_ALREADY_USED_IN_DB);
@@ -92,7 +90,7 @@ public class TypeServiceImpl implements TypeService {
      * {@inheritDoc}
      */
     @Override
-    public void deleteType(Long id) {
+    public void deleteType(final Long id) {
         Type type = typeRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(ExceptionMessageConstants.TYPE_NOT_FOUND_IN_DB));
         typeRepository.delete(type);

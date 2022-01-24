@@ -9,7 +9,7 @@ public final class NotFoundException extends ResponseStatusException {
      * Constructor with message.
      * @param reason {@link com.pamplemousse.pampleback.exception.ExceptionMessageConstants }
      */
-    public NotFoundException(String reason) {
+    public NotFoundException(final String reason) {
         super(HttpStatus.NOT_FOUND, reason);
     }
 

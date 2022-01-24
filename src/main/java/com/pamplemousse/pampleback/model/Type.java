@@ -14,27 +14,49 @@ import javax.persistence.Table;
 public final class Type implements Serializable {
     private static final long serialVersionUID = 967988323568L;
 
+    /**
+     * long id.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "type_id")
     private long id;
 
+    /**
+     * String name.
+     */
     @Column(name = "type_name")
     private String name;
 
+    /**
+     * getter id.
+     * @return Long id
+     */
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    /**
+     * setter id.
+     * @param id
+     */
+    public void setId(final Long id) {
         this.id = id;
     }
 
+    /**
+     * getter name.
+     * @return String name
+     */
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    /**
+     * setter name.
+     * @param name
+     */
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -54,7 +76,7 @@ public final class Type implements Serializable {
      * {@inheritDoc}
      */
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

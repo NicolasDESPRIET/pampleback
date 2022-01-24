@@ -23,6 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
 
+    /**
+     * UserService userService.
+     */
     private UserService userService;
 
     /**
@@ -30,7 +33,7 @@ public class UserController {
      * @param userService
      */
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(final UserService userService) {
         this.userService = userService;
     }
 
