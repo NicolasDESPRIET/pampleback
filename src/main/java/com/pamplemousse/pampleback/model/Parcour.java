@@ -2,12 +2,17 @@ package com.pamplemousse.pampleback.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -66,20 +71,29 @@ public class Parcour implements Serializable {
     /**
      * int nb_blank.
      */
-    @Column(name = "parcour_nb_blank")
-    private int nbBlank;
+    @ManyToMany
+    @JoinTable( name = "P_parcours_Question_link",
+    joinColumns = @JoinColumn(name="parcour_id"),
+    inverseJoinColumns = @JoinColumn(name = "q_id"))
+    private List<Question> nbBlank;
 
     /**
      * Qcm qcm.
      */
-    @Column(name = "parcour_qcm")
-    private Long qcmId;
+    @NotBlank
+    @NotNull
+    @JoinColumn(name = "parcour_qcm_id", referencedColumnName = "qcm_id")
+    @ManyToOne
+    private Qcm qcm;
 
     /**
      * User stagiaire.
      */
-    @Column(name = "parcour_stagiaire")
-    private Long stagiaireId;
+    @NotBlank
+    @NotNull
+    @JoinColumn(name = "parcour_stagiaire_id", referencedColumnName = "user_id")
+    @ManyToOne
+    private User stagiaire;
 
     /**
      * getter id.
@@ -181,7 +195,7 @@ public class Parcour implements Serializable {
      * getter nbBlank.
      * @return nbBlank
      */
-    public int getNbBlank() {
+    public List<Question> getNbBlank() {
         return nbBlank;
     }
 
@@ -189,27 +203,27 @@ public class Parcour implements Serializable {
      * setter nbBlank.
      * @param nbBlank
      */
-    public void setNbBlank(int nbBlank) {
+    public void setNbBlank(List<Question> nbBlank) {
         this.nbBlank = nbBlank;
     }
     
 
-    public Long getQcmId() {
-        return qcmId;
+    public Qcm getQcm() {
+        return qcm;
     }
 
-    public void setQcmId(Long qcmId) {
-        this.qcmId = qcmId;
+    public void setQcm(Qcm qcm) {
+        this.qcm = qcm;
     }
 
-    public Long getStagiaireId() {
-        return stagiaireId;
+    public User getStagiaire() {
+        return stagiaire;
     }
 
-    public void setStagiaireId(Long stagiaireId) {
-        this.stagiaireId = stagiaireId;
+    public void setStagiaire(User stagiaire) {
+        this.stagiaire = stagiaire;
     }
-
+    
     /**
      * {@inheritDoc}
      */
@@ -219,12 +233,12 @@ public class Parcour implements Serializable {
         int result = 1;
         result = prime * result + ((date == null) ? 0 : date.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + nbBlank;
+        result = prime * result + ((nbBlank == null) ? 0 : nbBlank.hashCode());
         result = prime * result + nbFailed;
         result = prime * result + nbSucces;
         result = prime * result + ((note == null) ? 0 : note.hashCode());
-        result = prime * result + ((qcmId == null) ? 0 : qcmId.hashCode());
-        result = prime * result + ((stagiaireId == null) ? 0 : stagiaireId.hashCode());
+        result = prime * result + ((qcm == null) ? 0 : qcm.hashCode());
+        result = prime * result + ((stagiaire == null) ? 0 : stagiaire.hashCode());
         result = prime * result + ((time == null) ? 0 : time.hashCode());
         return result;
     }
@@ -258,7 +272,11 @@ public class Parcour implements Serializable {
         } else if (!id.equals(other.id)) {
             return false;
         }
-        if (nbBlank != other.nbBlank) {
+        if (nbBlank == null) {
+            if (other.nbBlank != null) {
+                return false;
+            }
+        } else if (!nbBlank.equals(other.nbBlank)) {
             return false;
         }
         if (nbFailed != other.nbFailed) {
@@ -274,18 +292,18 @@ public class Parcour implements Serializable {
         } else if (!note.equals(other.note)) {
             return false;
         }
-        if (qcmId == null) {
-            if (other.qcmId != null) {
+        if (qcm == null) {
+            if (other.qcm != null) {
                 return false;
             }
-        } else if (!qcmId.equals(other.qcmId)) {
+        } else if (!qcm.equals(other.qcm)) {
             return false;
         }
-        if (stagiaireId == null) {
-            if (other.stagiaireId != null) {
+        if (stagiaire == null) {
+            if (other.stagiaire != null) {
                 return false;
             }
-        } else if (!stagiaireId.equals(other.stagiaireId)) {
+        } else if (!stagiaire.equals(other.stagiaire)) {
             return false;
         }
         if (time == null) {
@@ -304,7 +322,7 @@ public class Parcour implements Serializable {
     @Override
     public String toString() {
         return "Parcour [date=" + date + ", id=" + id + ", nbBlank=" + nbBlank + ", nbFailed=" + nbFailed
-                + ", nbSucces=" + nbSucces + ", note=" + note + ", qcm=" + qcmId + ", stagiaire=" + stagiaireId + ", time="
+                + ", nbSucces=" + nbSucces + ", note=" + note + ", qcm=" + qcm + ", stagiaire=" + stagiaire + ", time="
                 + time + "]";
     }
 }

@@ -3,6 +3,7 @@ package com.pamplemousse.pampleback.mapper;
 import java.util.List;
 
 import com.pamplemousse.pampleback.dto.QcmFromClientDto;
+import com.pamplemousse.pampleback.dto.QcmParcourDto;
 import com.pamplemousse.pampleback.dto.QcmToClientNoRDto;
 import com.pamplemousse.pampleback.model.Qcm;
 
@@ -47,4 +48,6 @@ public interface QcmMapper {
      */
     @Mapping(target = "qcmQuestion", ignore = true)
     void updateQcmFromDto(QcmFromClientDto dto, @MappingTarget Qcm entity);
+
+    QcmParcourDto qcmToQcmParcourDto(Qcm entity);
 }

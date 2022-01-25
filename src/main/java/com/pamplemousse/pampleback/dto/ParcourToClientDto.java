@@ -1,21 +1,36 @@
 package com.pamplemousse.pampleback.dto;
 
+import java.sql.Date;
 import java.util.List;
 
-public class ParcourFromClientDto {
+import com.pamplemousse.pampleback.model.User;
+
+public class ParcourToClientDto {
+    private Long id;
+
     private Double time;
+
+    private Date date;
 
     private String note;
 
     private int nbSucces;
-
+    
     private int nbFailed;
 
-    private List<Long> nbBlank;
+    private List<QuestionNoResponseDto> nbBlank; 
 
-    private Long qcmId;
+    private QcmParcourDto qcm;
 
-    private Long stagiaireId;
+    private User stagiaire;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Double getTime() {
         return time;
@@ -23,6 +38,14 @@ public class ParcourFromClientDto {
 
     public void setTime(Double time) {
         this.time = time;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getNote() {
@@ -49,28 +72,28 @@ public class ParcourFromClientDto {
         this.nbFailed = nbFailed;
     }
 
-    public List<Long> getNbBlank() {
+    public List<QuestionNoResponseDto> getNbBlank() {
         return nbBlank;
     }
 
-    public void setNbBlank(List<Long> nbBlank) {
+    public void setNbBlank(List<QuestionNoResponseDto> nbBlank) {
         this.nbBlank = nbBlank;
     }
 
-    public Long getQcmId() {
-        return qcmId;
+    public QcmParcourDto getQcm() {
+        return qcm;
     }
 
-    public void setQcmId(Long qcmId) {
-        this.qcmId = qcmId;
+    public void setQcm(QcmParcourDto qcm) {
+        this.qcm = qcm;
     }
 
-    public Long getStagiaireId() {
-        return stagiaireId;
+    public User getStagiaire() {
+        return stagiaire;
     }
 
-    public void setStagiaireId(Long stagiaireId) {
-        this.stagiaireId = stagiaireId;
+    public void setStagiaire(User stagiaire) {
+        this.stagiaire = stagiaire;
     }
 
     /**
@@ -80,12 +103,14 @@ public class ParcourFromClientDto {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + ((date == null) ? 0 : date.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((nbBlank == null) ? 0 : nbBlank.hashCode());
         result = prime * result + nbFailed;
         result = prime * result + nbSucces;
         result = prime * result + ((note == null) ? 0 : note.hashCode());
-        result = prime * result + ((qcmId == null) ? 0 : qcmId.hashCode());
-        result = prime * result + ((stagiaireId == null) ? 0 : stagiaireId.hashCode());
+        result = prime * result + ((qcm == null) ? 0 : qcm.hashCode());
+        result = prime * result + ((stagiaire == null) ? 0 : stagiaire.hashCode());
         result = prime * result + ((time == null) ? 0 : time.hashCode());
         return result;
     }
@@ -104,7 +129,21 @@ public class ParcourFromClientDto {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        ParcourFromClientDto other = (ParcourFromClientDto) obj;
+        ParcourToClientDto other = (ParcourToClientDto) obj;
+        if (date == null) {
+            if (other.date != null) {
+                return false;
+            }
+        } else if (!date.equals(other.date)) {
+            return false;
+        }
+        if (id == null) {
+            if (other.id != null) {
+                return false;
+            }
+        } else if (!id.equals(other.id)) {
+            return false;
+        }
         if (nbBlank == null) {
             if (other.nbBlank != null) {
                 return false;
@@ -125,18 +164,16 @@ public class ParcourFromClientDto {
         } else if (!note.equals(other.note)) {
             return false;
         }
-        if (qcmId == null) {
-            if (other.qcmId != null) {
+        if (qcm == null) { 
                 return false;
-            }
-        } else if (!qcmId.equals(other.qcmId)) {
+        } else if (!qcm.equals(other.qcm)) {
             return false;
         }
-        if (stagiaireId == null) {
-            if (other.stagiaireId != null) {
+        if (stagiaire == null) {
+            if (other.stagiaire != null) {
                 return false;
             }
-        } else if (!stagiaireId.equals(other.stagiaireId)) {
+        } else if (!stagiaire.equals(other.stagiaire)) {
             return false;
         }
         if (time == null) {
@@ -154,7 +191,9 @@ public class ParcourFromClientDto {
      */
     @Override
     public String toString() {
-        return "ParcourFromClientDto [nbBlank=" + nbBlank + ", nbFailed=" + nbFailed + ", nbSucces=" + nbSucces
-                + ", note=" + note + ", qcmId=" + qcmId + ", stagiaireId=" + stagiaireId + ", time=" + time + "]";
+        return "ParcourToClientDto [date=" + date + ", id=" + id + ", nbBlank=" + nbBlank + ", nbFailed=" + nbFailed
+                + ", nbSucces=" + nbSucces + ", note=" + note + ", qcm=" + qcm + ", stagiaire=" + stagiaire + ", time="
+                + time + "]";
     }
+    
 }
