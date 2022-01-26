@@ -2,7 +2,10 @@ version: '3.3'
 
 services:
   db-plemousse:
-    image: mysql:8.0.17
+    image: dbplemousse
+    build:
+      context: . # Use an image built from the specified dockerfile in the `pampleback_app` directory.
+      dockerfile: .\docker\db\Dockerfile
     restart: always
     env_file:
       - .env
@@ -24,6 +27,7 @@ services:
       # Where our data will be persisted
     volumes:
       - my-db:/var/lib/mysql
+      - ./src/main/resources/sql:/docker-entrypoint-initdb.d
     networks:
       my-networks:
 
@@ -33,7 +37,7 @@ services:
     # Configuration for building the docker image for the backend service
     build:
       context: . # Use an image built from the specified dockerfile in the `pampleback_app` directory.
-      dockerfile: Dockerfile
+      dockerfile: .\docker\back\Dockerfile
     env_file:
       - .env
     ports:
@@ -43,6 +47,8 @@ services:
     restart: unless-stopped
     depends_on: 
       - db-plemousse # This service depends on mysql. Start that first.
+    links:
+      - db-plemousse
     environment: # Pass environment variables to the service
       SPRING_DATASOURCE_URL: jdbc:mysql://db-plemousse:${MYSQLDB_DOCKER_PORT}/${MYSQLDB_DATABASE}
       SPRING_DATASOURCE_USERNAME: ${MYSQLDB_ROOT_USER}

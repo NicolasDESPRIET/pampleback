@@ -7,9 +7,9 @@ import java.util.List;
 
 import com.pamplemousse.pampleback.dto.DateDto;
 import com.pamplemousse.pampleback.dto.ParcourFromClientDto;
+import com.pamplemousse.pampleback.dto.ParcourToClientDto;
 import com.pamplemousse.pampleback.exception.ExceptionMessageConstants;
 import com.pamplemousse.pampleback.exception.server.BadRequestException;
-import com.pamplemousse.pampleback.model.Parcour;
 import com.pamplemousse.pampleback.service.ParcourService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,20 +43,20 @@ public class ParcourControler {
     
     /**
      * way to get all parcours.
-     * @return List<Parcour>
+     * @return List<ParcourToClientDto>
      */
     @GetMapping
-    public List<Parcour> getAllParcours(){
+    public List<ParcourToClientDto> getAllParcours(){
         return parcourService.getAllParcours();
     }
 
     /**
      * way to get all parcours on a date (yyyy-MM-dd)
      * @param date (yyyy-MM-dd)
-     * @return List<Parcour>
+     * @return List<ParcourToClientDto>
      */
     @GetMapping(path = "/date")
-    public List<Parcour> getAllParcourByDate(@RequestBody final DateDto date) {
+    public List<ParcourToClientDto> getAllParcourByDate(@RequestBody final DateDto date) {
         Date date1;
         try {
             date1 = new SimpleDateFormat("yyyy-MM-dd").parse(date.getDate());
@@ -69,41 +69,41 @@ public class ParcourControler {
     /**
      * way du get all parcours done on a qcm.
      * @param id the id of the qcm.
-     * @return List<Parcour>
+     * @return List<ParcourToClientDto>
      */
     @GetMapping(path = "/qcm/{id}")
-    public List<Parcour> getAllParcourByQcm(@PathVariable final Long id) {
+    public List<ParcourToClientDto> getAllParcourByQcm(@PathVariable final Long id) {
         return parcourService.getAllParcoursByQcm(id);
     }
 
     /**
      * way to get all parcours done by an user
      * @param id the id of the user.
-     * @return List<Parcour>
+     * @return List<ParcourToClientDto>
      */
     @GetMapping(path = "/user/{id}")
-    public List<Parcour> getAllParcourByUser(@PathVariable final Long id) {
+    public List<ParcourToClientDto> getAllParcourByUser(@PathVariable final Long id) {
         return parcourService.getAllParcoursByUser(id);
     }
 
     /**
      * way to get one parcours by his id.
      * @param id
-     * @return Parcour
+     * @return ParcourToClientDto
      */
     @GetMapping(path = "/{id}")
-    public Parcour getOneById(@PathVariable final Long id) {
+    public ParcourToClientDto getOneById(@PathVariable final Long id) {
         return parcourService.getOneById(id);
     }
 
     /**
      * way to create parcour
      * @param parcourFromClientDto date of the parcour
-     * @return Parcour
+     * @return ParcourToClientDto
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Parcour createParcour(@RequestBody final ParcourFromClientDto parcourFromClientDto) {
+    public ParcourToClientDto createParcour(@RequestBody final ParcourFromClientDto parcourFromClientDto) {
         System.out.println(parcourFromClientDto);
         return parcourService.createParcour(parcourFromClientDto);
     }
@@ -112,10 +112,10 @@ public class ParcourControler {
      * way to edit a parcour fom his id.
      * @param id
      * @param parcourFromClientDto
-     * @return Parcour
+     * @return ParcourToClientDto
      */
     @PutMapping(path = "/{id}")
-    public Parcour updateParcour(@PathVariable final Long id, @RequestBody final ParcourFromClientDto parcourFromClientDto) {
+    public ParcourToClientDto updateParcour(@PathVariable final Long id, @RequestBody final ParcourFromClientDto parcourFromClientDto) {
         return parcourService.updateParcour(id, parcourFromClientDto);
     }
 

@@ -34,6 +34,11 @@ Then, to apply the changes, you will just have to redo step 2.
 ### Second way, with bdd and back app in a docker, using an env file. It will be necessary to ask the env file to Nicolas Despriet.
 After getting the .env, put it next to the docker-compose, then :
 ```
+$ docker-compose -f docker-compose-db.yml up --build
+```
+that will be initiate the bd correctly. Then shut down the contener with ctrl+c.
+After, you can run the complete docker compose.
+```
 $ docker-compose -f docker-compose.yml up --build
 ```
 
