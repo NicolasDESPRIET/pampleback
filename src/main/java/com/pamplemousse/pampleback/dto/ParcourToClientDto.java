@@ -1,6 +1,5 @@
 package com.pamplemousse.pampleback.dto;
 
-import java.sql.Date;
 import java.util.List;
 
 import com.pamplemousse.pampleback.model.User;
@@ -10,7 +9,7 @@ public class ParcourToClientDto {
 
     private Double time;
 
-    private Date date;
+    private String date;
 
     private String note;
 
@@ -40,11 +39,11 @@ public class ParcourToClientDto {
         this.time = time;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
