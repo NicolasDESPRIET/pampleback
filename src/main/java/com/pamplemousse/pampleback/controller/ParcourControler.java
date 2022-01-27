@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import com.pamplemousse.pampleback.dto.DateDto;
 import com.pamplemousse.pampleback.dto.ParcourFromClientDto;
 import com.pamplemousse.pampleback.dto.ParcourToClientDto;
 import com.pamplemousse.pampleback.exception.ExceptionMessageConstants;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -56,10 +56,10 @@ public class ParcourControler {
      * @return List<ParcourToClientDto>
      */
     @GetMapping(path = "/date")
-    public List<ParcourToClientDto> getAllParcourByDate(@RequestBody final DateDto date) {
+    public List<ParcourToClientDto> getAllParcourByDate(@RequestParam final String date) {
         Date date1;
         try {
-            date1 = new SimpleDateFormat("yyyy-MM-dd").parse(date.getDate());
+            date1 = new SimpleDateFormat("yyyy-MM-dd").parse(date);
         } catch (ParseException e) {
             throw new BadRequestException(ExceptionMessageConstants.PARCOUR_DATE_BAD_FORMAT);
         }  
