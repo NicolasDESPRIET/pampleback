@@ -5,11 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import com.pamplemousse.pampleback.dto.ParcourFromClientDto;
-import com.pamplemousse.pampleback.dto.ParcourToClientDto;
+import com.pamplemousse.pampleback.dto.ParcoursFromClientDto;
+import com.pamplemousse.pampleback.dto.ParcoursToClientDto;
 import com.pamplemousse.pampleback.exception.ExceptionMessageConstants;
 import com.pamplemousse.pampleback.exception.server.BadRequestException;
-import com.pamplemousse.pampleback.service.ParcourService;
+import com.pamplemousse.pampleback.service.ParcoursService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,20 +25,20 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("parcour")
-public class ParcourControler {
+@RequestMapping("parcours")
+public class ParcoursControler {
     /**
-     * ParcourService parcourService.
+     * ParcoursService parcoursService.
      */
-    private ParcourService parcourService;
+    private ParcoursService parcoursService;
 
     /**
      * constructor of the controler.
-     * @param parcourService
+     * @param parcoursService
      */
     @Autowired
-    public ParcourControler(ParcourService parcourService) {
-        this.parcourService = parcourService;
+    public ParcoursControler(ParcoursService parcoursService) {
+        this.parcoursService = parcoursService;
     }
     
     /**
@@ -46,8 +46,8 @@ public class ParcourControler {
      * @return List<ParcourToClientDto>
      */
     @GetMapping
-    public List<ParcourToClientDto> getAllParcours(){
-        return parcourService.getAllParcours();
+    public List<ParcoursToClientDto> getAllParcours(){
+        return parcoursService.getAllParcours();
     }
 
     /**
@@ -56,14 +56,14 @@ public class ParcourControler {
      * @return List<ParcourToClientDto>
      */
     @GetMapping(path = "/date")
-    public List<ParcourToClientDto> getAllParcourByDate(@RequestParam final String date) {
+    public List<ParcoursToClientDto> getAllParcoursByDate(@RequestParam final String date) {
         Date date1;
         try {
             date1 = new SimpleDateFormat("yyyy-MM-dd").parse(date);
         } catch (ParseException e) {
             throw new BadRequestException(ExceptionMessageConstants.PARCOUR_DATE_BAD_FORMAT);
         }  
-        return parcourService.getAllParcoursByDate(date1);
+        return parcoursService.getAllParcoursByDate(date1);
     }
 
     /**
@@ -72,8 +72,8 @@ public class ParcourControler {
      * @return List<ParcourToClientDto>
      */
     @GetMapping(path = "/qcm/{id}")
-    public List<ParcourToClientDto> getAllParcourByQcm(@PathVariable final Long id) {
-        return parcourService.getAllParcoursByQcm(id);
+    public List<ParcoursToClientDto> getAllParcoursByQcm(@PathVariable final Long id) {
+        return parcoursService.getAllParcoursByQcm(id);
     }
 
     /**
@@ -82,8 +82,8 @@ public class ParcourControler {
      * @return List<ParcourToClientDto>
      */
     @GetMapping(path = "/user/{id}")
-    public List<ParcourToClientDto> getAllParcourByUser(@PathVariable final Long id) {
-        return parcourService.getAllParcoursByUser(id);
+    public List<ParcoursToClientDto> getAllParcoursByUser(@PathVariable final Long id) {
+        return parcoursService.getAllParcoursByUser(id);
     }
 
     /**
@@ -92,8 +92,8 @@ public class ParcourControler {
      * @return ParcourToClientDto
      */
     @GetMapping(path = "/{id}")
-    public ParcourToClientDto getOneById(@PathVariable final Long id) {
-        return parcourService.getOneById(id);
+    public ParcoursToClientDto getOneById(@PathVariable final Long id) {
+        return parcoursService.getOneById(id);
     }
 
     /**
@@ -103,9 +103,9 @@ public class ParcourControler {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ParcourToClientDto createParcour(@RequestBody final ParcourFromClientDto parcourFromClientDto) {
+    public ParcoursToClientDto createParcours(@RequestBody final ParcoursFromClientDto parcourFromClientDto) {
         System.out.println(parcourFromClientDto);
-        return parcourService.createParcour(parcourFromClientDto);
+        return parcoursService.createParcour(parcourFromClientDto);
     }
 
     /**
@@ -115,8 +115,8 @@ public class ParcourControler {
      * @return ParcourToClientDto
      */
     @PutMapping(path = "/{id}")
-    public ParcourToClientDto updateParcour(@PathVariable final Long id, @RequestBody final ParcourFromClientDto parcourFromClientDto) {
-        return parcourService.updateParcour(id, parcourFromClientDto);
+    public ParcoursToClientDto updateParcours(@PathVariable final Long id, @RequestBody final ParcoursFromClientDto parcourFromClientDto) {
+        return parcoursService.updateParcour(id, parcourFromClientDto);
     }
 
     /**
@@ -124,7 +124,7 @@ public class ParcourControler {
      * @param id
      */
     @DeleteMapping(path = "/{id}")
-    public void deleteParcour(@PathVariable final Long id) {
-        parcourService.deleteParcour(id);
+    public void deleteParcours(@PathVariable final Long id) {
+        parcoursService.deleteParcour(id);
     }
 }

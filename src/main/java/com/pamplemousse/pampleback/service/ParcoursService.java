@@ -3,50 +3,50 @@ package com.pamplemousse.pampleback.service;
 import java.util.Date;
 import java.util.List;
 
-import com.pamplemousse.pampleback.dto.ParcourFromClientDto;
-import com.pamplemousse.pampleback.dto.ParcourToClientDto;
+import com.pamplemousse.pampleback.dto.ParcoursFromClientDto;
+import com.pamplemousse.pampleback.dto.ParcoursToClientDto;
 
-public interface ParcourService {
+public interface ParcoursService {
     /**
      * get all parcours in the db.
      * @return List<Parcour>
      */
-    List<ParcourToClientDto> getAllParcours();
+    List<ParcoursToClientDto> getAllParcours();
 
     /**
      * get all parcours done on a specifique date.
      * @param date
      * @return List<Parcour>
      */
-    List<ParcourToClientDto> getAllParcoursByDate(Date date);
+    List<ParcoursToClientDto> getAllParcoursByDate(Date date);
 
     /**
      * gat all parcours in the db done by an user.
      * @param id
      * @return List<Parcour>
      */
-    List<ParcourToClientDto> getAllParcoursByUser(Long id);
+    List<ParcoursToClientDto> getAllParcoursByUser(Long id);
 
     /**
      * get all parcours done on a specific qcm.
      * @param id
      * @return List<Parcour>
      */
-    List<ParcourToClientDto> getAllParcoursByQcm(Long id);
+    List<ParcoursToClientDto> getAllParcoursByQcm(Long id);
 
     /**
      * get one parcours by his id.
      * @param id
      * @return Parcour
      */
-    ParcourToClientDto getOneById(Long id);
+    ParcoursToClientDto getOneById(Long id);
 
     /**
      * create a parcours from entri data
      * @param parcourFromClientDto
      * @return Parcour the parcours created
      */
-    ParcourToClientDto createParcour(ParcourFromClientDto parcourFromClientDto);
+    ParcoursToClientDto createParcour(ParcoursFromClientDto parcourFromClientDto);
 
     /**
      * update a parcours from his id with new data.
@@ -54,7 +54,7 @@ public interface ParcourService {
      * @param parcourFromClientDto
      * @return Parcour the parcour updated
      */
-    ParcourToClientDto updateParcour(Long id, ParcourFromClientDto parcourFromClientDto);
+    ParcoursToClientDto updateParcour(Long id, ParcoursFromClientDto parcourFromClientDto);
 
     /**
      * delete one parcours by his id.

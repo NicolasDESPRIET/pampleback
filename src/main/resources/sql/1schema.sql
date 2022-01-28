@@ -6,19 +6,19 @@ create table hibernate_sequence (next_val bigint);
 insert into hibernate_sequence values ( 1 );
 
 create table p_parcours_question_link (
-    parcour_id bigint not null,
+    parcours_id bigint not null,
     q_id bigint not null
 );
-create table parcour (
-    parcour_id bigint not null auto_increment,
-    parcour_date date,
-    parcour_nb_failed integer,
-    parcour_nb_succes integer,
-    parcour_note varchar(255),
-    parcour_time double precision,
-    parcour_qcm_id bigint,
-    parcour_stagiaire_id bigint,
-    primary key (parcour_id)
+create table parcours (
+    parcours_id bigint not null auto_increment,
+    parcours_date date,
+    parcours_nb_failed integer,
+    parcours_nb_succes integer,
+    parcours_note varchar(255),
+    parcours_time double precision,
+    parcours_qcm_id bigint,
+    parcours_stagiaire_id bigint,
+    primary key (parcours_id)
 );
 create table qcm (
     qcm_id bigint not null auto_increment,
@@ -39,7 +39,7 @@ create table question_responses (
 );
 create table questions (
     q_id bigint not null auto_increment,
-    q_ennonce varchar(255),
+    q_enonce varchar(255),
     primary key (q_id)
 );
 create table types (
@@ -58,9 +58,9 @@ create table users (
 
 -- alter table
 alter table p_parcours_question_link add constraint FKgjv4wr6nlib3l2no83f0ytnv1 foreign key (q_id) references questions (q_id);
-alter table p_parcours_question_link add constraint FKs3qec0ktqevjw9ebcs0tmke0h foreign key (parcour_id) references parcour (parcour_id);
-alter table parcour add constraint FKnb4mig0y2j10qhhh1d8d8sgcv foreign key (parcour_qcm_id) references qcm (qcm_id);
-alter table parcour add constraint FK4kxppfbvys63upkw0kcw9xj1e foreign key (parcour_stagiaire_id) references users (user_id);
+alter table p_parcours_question_link add constraint FKs3qec0ktqevjw9ebcs0tmke0h foreign key (parcours_id) references parcours (parcours_id);
+alter table parcours add constraint FKnb4mig0y2j10qhhh1d8d8sgcv foreign key (parcours_qcm_id) references qcm (qcm_id);
+alter table parcours add constraint FK4kxppfbvys63upkw0kcw9xj1e foreign key (parcours_stagiaire_id) references users (user_id);
 alter table qcm_qcm_question add constraint FK8iele2t2svu3os6t1dyi8uekl foreign key (qcm_question_q_id) references questions (q_id);
 alter table qcm_qcm_question add constraint FKo1ufy565aseos23qrs8wa7vnt foreign key (qcm_qcm_id) references qcm (qcm_id);
 alter table question_responses add constraint FKijqoat21w3yb3wmcnhjxcbm8v foreign key (question_q_id) references questions (q_id);

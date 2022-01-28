@@ -88,7 +88,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"type 421\"\r\n}",
+							"raw": "{\r\n    \"name\":\"stagiaire\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -109,7 +109,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "6"
+									"value": "2"
 								}
 							]
 						}
@@ -338,206 +338,6 @@
 			]
 		},
 		{
-			"name": "QuestionResponse",
-			"item": [
-				{
-					"name": "getAllQuestion",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8091/questions",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8091",
-							"path": [
-								"questions"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getQuestionByID",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8091/questions/:id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8091",
-							"path": [
-								"questions",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getQuestionByEnnonce",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8091/questions/ennonce/:ennonce",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8091",
-							"path": [
-								"questions",
-								"ennonce",
-								":ennonce"
-							],
-							"variable": [
-								{
-									"key": "ennonce",
-									"value": "\"toto est bete ?\""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getQuestionByIDnoR",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8091/questions/:id/noR",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8091",
-							"path": [
-								"questions",
-								":id",
-								"noR"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "createQuestion",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"ennonce\" : \"toto est bête ? ou pas ?\",\r\n    \"responses\" : {\r\n        \"oui\" : 1,\r\n        \"non\" : 0\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8091/questions/:id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8091",
-							"path": [
-								"questions",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update Question",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\" : 1,\r\n    \"ennonce\" : \"toto est-il bête ?\",\r\n    \"responses\" : {\r\n        \"non\" : 1,\r\n        \"oui\" : 0\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8091/questions/:id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8091",
-							"path": [
-								"questions",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete Question",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8091/questions/:id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8091",
-							"path": [
-								"questions",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "QCm",
 			"item": [
 				{
@@ -586,7 +386,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\" : \"qcm3\",\r\n    \"description\" : \"un qcm de test 3\",\r\n    \"author\" : \"jean michel 3\"\r\n}",
+							"raw": "{\r\n    \"name\" : \"qcm\",\r\n    \"description\" : \"un qcm de test\",\r\n    \"author\" : \"jean michel\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -815,6 +615,206 @@
 			]
 		},
 		{
+			"name": "QuestionResponse",
+			"item": [
+				{
+					"name": "getAllQuestion",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/questions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"questions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getQuestionByID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/questions/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"questions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getQuestionByEnnonce",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/questions/ennonce/:ennonce",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"questions",
+								"ennonce",
+								":ennonce"
+							],
+							"variable": [
+								{
+									"key": "ennonce",
+									"value": "\"toto est bete ?\""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getQuestionByIDnoR",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/questions/:id/noR",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"questions",
+								":id",
+								"noR"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createQuestion",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ennonce\" : \"toto est bête ? ou pas ?\",\r\n    \"responses\" : {\r\n        \"oui\" : 1,\r\n        \"non\" : 0\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/questions/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"questions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Question",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : 1,\r\n    \"ennonce\" : \"toto est-il bête ?\",\r\n    \"responses\" : {\r\n        \"non\" : 1,\r\n        \"oui\" : 0\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/questions/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"questions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Question",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/questions/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"questions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Parcour",
 			"item": [
 				{
@@ -823,14 +823,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8091/parcour/",
+							"raw": "http://localhost:8091/parcours/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8091",
 							"path": [
-								"parcour",
+								"parcours",
 								""
 							]
 						}
@@ -855,14 +855,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8091/parcour/date",
+							"raw": "http://localhost:8091/parcours/date",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8091",
 							"path": [
-								"parcour",
+								"parcours",
 								"date"
 							]
 						}
@@ -875,14 +875,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8091/parcour/user/:id",
+							"raw": "http://localhost:8091/parcours/user/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8091",
 							"path": [
-								"parcour",
+								"parcours",
 								"user",
 								":id"
 							],
@@ -902,14 +902,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8091/parcour/qcm/:id",
+							"raw": "http://localhost:8091/parcours/qcm/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8091",
 							"path": [
-								"parcour",
+								"parcours",
 								"qcm",
 								":id"
 							],
@@ -929,14 +929,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8091/parcour/:id",
+							"raw": "http://localhost:8091/parcours/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8091",
 							"path": [
-								"parcour",
+								"parcours",
 								":id"
 							],
 							"variable": [
@@ -950,7 +950,7 @@
 					"response": []
 				},
 				{
-					"name": "create parcour",
+					"name": "create parcours",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -964,14 +964,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8091/parcour",
+							"raw": "http://localhost:8091/parcours",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8091",
 							"path": [
-								"parcour"
+								"parcours"
 							]
 						}
 					},
@@ -992,14 +992,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8091/parcour/:id",
+							"raw": "http://localhost:8091/parcours/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8091",
 							"path": [
-								"parcour",
+								"parcours",
 								":id"
 							],
 							"variable": [
@@ -1013,19 +1013,19 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "delete parcours",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8091/parcour/:id",
+							"raw": "http://localhost:8091/parcours/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8091",
 							"path": [
-								"parcour",
+								"parcours",
 								":id"
 							],
 							"variable": [

@@ -32,11 +32,11 @@ public interface QuestionService {
     /**
      * get the first Question by his ennonce.
      *
-     * @param ennonce the question researched.
+     * @param enonce the question researched.
      * @return the researched question.
      * @throws NotFoundException.
      */
-    Question getQuestionByEnnonce(String ennonce);
+    Question getQuestionByEnonce(String enonce);
 
     /**
      * add an Question to the db.

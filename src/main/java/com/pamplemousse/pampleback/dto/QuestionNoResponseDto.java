@@ -9,9 +9,9 @@ public class QuestionNoResponseDto {
     private Long id;
 
     /**
-     * ennonce of the question.
+     * enonce of the question.
      */
-    private String ennonce;
+    private String enonce;
 
     /**
      * list of response without values.
@@ -35,19 +35,19 @@ public class QuestionNoResponseDto {
     }
 
     /**
-     * getter ennonce.
-     * @return ennonce
+     * getter enonce.
+     * @return enonce
      */
-    public String getEnnonce() {
-        return ennonce;
+    public String getEnonce() {
+        return enonce;
     }
 
     /**
      * setter ennonce.
      * @param ennonce
      */
-    public void setEnnonce(final String ennonce) {
-        this.ennonce = ennonce;
+    public void setEnonce(final String enonce) {
+        this.enonce = enonce;
     }
 
     /**
@@ -73,7 +73,7 @@ public class QuestionNoResponseDto {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((ennonce == null) ? 0 : ennonce.hashCode());
+        result = prime * result + ((enonce == null) ? 0 : enonce.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((responsesList == null) ? 0 : responsesList.hashCode());
         return result;
@@ -94,11 +94,11 @@ public class QuestionNoResponseDto {
             return false;
         }
         QuestionNoResponseDto other = (QuestionNoResponseDto) obj;
-        if (ennonce == null) {
-            if (other.ennonce != null) {
+        if (enonce == null) {
+            if (other.enonce != null) {
                 return false;
             }
-        } else if (!ennonce.equals(other.ennonce)) {
+        } else if (!enonce.equals(other.enonce)) {
             return false;
         }
         if (id == null) {
@@ -123,7 +123,7 @@ public class QuestionNoResponseDto {
      */
     @Override
     public String toString() {
-        return "QuestionNoResponseDto [ennonce=" + ennonce + ", id=" + id + ", responses=" + responsesList + "]";
+        return "QuestionNoResponseDto [enonce=" + enonce + ", id=" + id + ", responses=" + responsesList + "]";
     }
 
 }
