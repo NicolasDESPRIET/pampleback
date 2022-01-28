@@ -80,12 +80,12 @@ public class QuestionController {
     /**
      * way to get question by his ennonce.
      * getMapping
-     * @param ennonce
+     * @param enonce
      * @return question
      */
     @GetMapping(path = "/ennonce/{ennonce}")
     public Question getQuestionByEnnonce(@PathVariable final String ennonce) {
-        return questionService.getQuestionByEnnonce(ennonce);
+        return questionService.getQuestionByEnonce(ennonce);
     }
 
     /**

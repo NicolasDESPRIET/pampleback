@@ -63,8 +63,8 @@ public class QuestionServiceImpl implements QuestionService {
      * {@inheritDoc}
      */
     @Override
-    public Question getQuestionByEnnonce(final String ennonce) {
-        Question question = questionRepository.findByEnnonce(ennonce)
+    public Question getQuestionByEnonce(final String enonce) {
+        Question question = questionRepository.findByEnonce(enonce)
                 .orElseThrow(() -> new NotFoundException(ExceptionMessageConstants.QUESTION_NOT_FOUND_IN_DB));
         return question;
     }
@@ -74,7 +74,7 @@ public class QuestionServiceImpl implements QuestionService {
      */
     @Override
     public Question createQuestion(final Question question) {
-        if (!questionRepository.findByEnnonce(question.getEnnonce()).isEmpty()) {
+        if (!questionRepository.findByEnonce(question.getEnonce()).isEmpty()) {
             throw new BadRequestException(ExceptionMessageConstants.QUESTION_ENNONCE_USED_IN_DB);
         }
         return questionRepository.save(question);
@@ -85,7 +85,7 @@ public class QuestionServiceImpl implements QuestionService {
      */
     @Override
     public Question updateQuestion(final Question question, final Long id) {
-        Optional<Question> questionEnnonce = questionRepository.findByEnnonce(question.getEnnonce());
+        Optional<Question> questionEnnonce = questionRepository.findByEnonce(question.getEnonce());
         if (!questionEnnonce.isEmpty()) {
             throw new BadRequestException(ExceptionMessageConstants.QUESTION_ENNONCE_USED_IN_DB);
         }

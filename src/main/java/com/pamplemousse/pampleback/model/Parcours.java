@@ -20,8 +20,8 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name = "parcour")
-public class Parcour implements Serializable {
+@Table(name = "parcours")
+public class Parcours implements Serializable {
     private static final long serialVersionUID = 74817258L;
 
     /**
@@ -29,7 +29,7 @@ public class Parcour implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "parcour_id")
+    @Column(name = "parcours_id")
     private Long id;
 
     /**
@@ -37,7 +37,7 @@ public class Parcour implements Serializable {
      */
     @NotBlank
     @NotNull
-    @Column(name = "parcour_time")
+    @Column(name = "parcours_time")
     private Double time;
 
     /**
@@ -45,7 +45,7 @@ public class Parcour implements Serializable {
      */
     @NotBlank
     @NotNull
-    @Column(name = "parcour_date")
+    @Column(name = "parcours_date")
     private Date date;
 
     /**
@@ -53,19 +53,19 @@ public class Parcour implements Serializable {
      */
     @NotBlank
     @NotNull
-    @Column(name = "parcour_note")
+    @Column(name = "parcours_note")
     private String note;
 
     /**
      * int nb_succes.
      */
-    @Column(name = "parcour_nb_succes")
+    @Column(name = "parcours_nb_succes")
     private int nbSucces;
 
     /**
      * int nb_failed.
      */
-    @Column(name = "parcour_nb_failed")
+    @Column(name = "parcours_nb_failed")
     private int nbFailed;
 
     /**
@@ -73,7 +73,7 @@ public class Parcour implements Serializable {
      */
     @ManyToMany
     @JoinTable( name = "P_parcours_Question_link",
-    joinColumns = @JoinColumn(name="parcour_id"),
+    joinColumns = @JoinColumn(name="parcours_id"),
     inverseJoinColumns = @JoinColumn(name = "q_id"))
     private List<Question> nbBlank;
 
@@ -82,7 +82,7 @@ public class Parcour implements Serializable {
      */
     @NotBlank
     @NotNull
-    @JoinColumn(name = "parcour_qcm_id", referencedColumnName = "qcm_id")
+    @JoinColumn(name = "parcours_qcm_id", referencedColumnName = "qcm_id")
     @ManyToOne
     private Qcm qcm;
 
@@ -91,7 +91,7 @@ public class Parcour implements Serializable {
      */
     @NotBlank
     @NotNull
-    @JoinColumn(name = "parcour_stagiaire_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "parcours_stagiaire_id", referencedColumnName = "user_id")
     @ManyToOne
     private User stagiaire;
 
@@ -257,7 +257,7 @@ public class Parcour implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        Parcour other = (Parcour) obj;
+        Parcours other = (Parcours) obj;
         if (date == null) {
             if (other.date != null) {
                 return false;

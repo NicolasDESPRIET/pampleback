@@ -29,8 +29,8 @@ public final class Question implements Serializable {
     /**
      * String ennonce.
      */
-    @Column(name = "q_ennonce")
-    private String ennonce;
+    @Column(name = "q_enonce")
+    private String enonce;
 
     /**
      * Response response.
@@ -60,16 +60,16 @@ public final class Question implements Serializable {
      * getter ennonce.
      * @return ennonce
      */
-    public String getEnnonce() {
-        return ennonce;
+    public String getEnonce() {
+        return enonce;
     }
 
     /**
      * setter ennonce.
      * @param ennonce
      */
-    public void setEnnonce(final String ennonce) {
-        this.ennonce = ennonce;
+    public void setEnonce(final String enonce) {
+        this.enonce = enonce;
     }
 
     /**
@@ -95,7 +95,7 @@ public final class Question implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((ennonce == null) ? 0 : ennonce.hashCode());
+        result = prime * result + ((enonce == null) ? 0 : enonce.hashCode());
         result = prime * result + (int) (id ^ (id >>> 32));
         result = prime * result + ((responses == null) ? 0 : responses.hashCode());
         return result;
@@ -116,11 +116,11 @@ public final class Question implements Serializable {
             return false;
         }
         Question other = (Question) obj;
-        if (ennonce == null) {
-            if (other.ennonce != null) {
+        if (enonce == null) {
+            if (other.enonce != null) {
                 return false;
             }
-        } else if (!ennonce.equals(other.ennonce)) {
+        } else if (!enonce.equals(other.enonce)) {
             return false;
         }
         if (id != other.id) {
@@ -141,7 +141,7 @@ public final class Question implements Serializable {
      */
     @Override
     public String toString() {
-        return "Question [ennonce=" + ennonce + ", id=" + id + ", responses=" + responses + "]";
+        return "Question [enonce=" + enonce + ", id=" + id + ", responses=" + responses + "]";
     }
     
 }
